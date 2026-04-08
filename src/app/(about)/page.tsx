@@ -5,7 +5,7 @@ import { profile } from "@/data/profile";
 import { motion } from "framer-motion";
 import { UserRound } from "lucide-react";
 
-export const About = () => {
+export default function About() {
   return (
     <section
       className="flex justify-center items-center h-auto px-6 md:px-12 py-12 overflow-hidden"
