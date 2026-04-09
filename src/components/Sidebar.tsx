@@ -3,7 +3,7 @@ interface sidebarType {
   title: string;
 }
 
-export const Sidebar = (data: sidebarType) => {
+export const Sidebar: React.FC<sidebarType> = (data) => {
   const { num, title } = data;
   return (
     <div
@@ -13,7 +13,7 @@ export const Sidebar = (data: sidebarType) => {
       <span className="text-2xl font-bold text-yellow-600 [writing-mode:vertical-rl] font-serif">
         {num}
       </span>
-      <div className="w-1 h-15 bg-gray-300">‎‎‎ </div>
+      <div className="w-px h-16 bg-border">‎‎‎ </div>
       <span className="text-1xl font-bold tracking-[0.2em] [writing-mode:vertical-rl] font-serif">
         {title}
       </span>

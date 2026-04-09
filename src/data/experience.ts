@@ -3,7 +3,8 @@ interface JobDetail {
   description: string;
 }
 
-interface experience {
+export interface Experience {
+  image: string;
   company: string;
   location: string;
   role: string;
@@ -19,8 +20,9 @@ export const statistics = [
   { label: "Projects Published", value: "3" },
 ];
 
-export const experiences: experience[] = [
+export const experiences: Experience[] = [
   {
+    image: "/images/rivolta.png",
     company: "Rivolta Solusi Teknologi",
     location: "Samarinda",
     role: "Software Developer - Intern",

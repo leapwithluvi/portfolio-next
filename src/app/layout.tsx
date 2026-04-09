@@ -3,7 +3,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { seo } from "@/data/seo";
 import { Navbar } from "@/components/Navbar";
-// import { About } from "./(about)/page";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -46,18 +45,33 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col pt-10">
-        <div className="relative min-h-screen bg-background text-foreground transition-colors duration-300">
-        {/* Global Vertical Dividers */}
-          <div className="absolute left-[calc(50%-640px)] top-0 bottom-0 w-[1px] bg-border hidden xl:block" />
-            <div className="absolute right-[calc(50%-640px)] top-0 bottom-0 w-[1px] bg-border hidden xl:block" />
-              <Navbar />
-                {children}
-              {/* <About /> */}
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+             __html: `
+              (function() {
+                try {
+                  var theme = localStorage.getItem('theme');
+                  var supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+                  if (!theme && supportDarkMode) theme = 'dark';
+                  if (theme === 'dark') document.documentElement.classList.add('dark');
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
+      </head>
+      <body className="antialiased min-h-screen">
+        <div className="relative flex min-h-screen flex-col bg-background text-foreground transition-colors duration-300">
+          {/* Global Vertical Dividers */}
+          <div className="absolute left-[calc(55%-720px)] top-0 bottom-0 w-[1px] bg-border/50 hidden 2xl:block pointer-events-none z-0" />
+          <div className="absolute right-[calc(55%-720px)] top-0 bottom-0 w-[1px] bg-border/50 hidden 2xl:block pointer-events-none z-0" />
+          
+          <Navbar />
+          <main className="flex-1">
+            {children}
+          </main>
         </div>
       </body>
     </html>
