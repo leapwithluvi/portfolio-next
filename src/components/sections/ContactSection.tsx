@@ -37,7 +37,7 @@ export const ContactSection = () => {
             <motion.a
               href={socials.find(s => s.name === "Email")?.href || "#"}
               whileHover={{ scale: 1.05 }}
-              className="px-10 py-5 bg-yellow-600 text-white rounded-full font-bold shadow-2xl shadow-yellow-600/20 hover:bg-yellow-700 transition-all flex items-center gap-2 text-lg mb-16"
+              className="px-10 py-5 bg-yellow-600 text-zinc-950 rounded-full font-bold shadow-2xl shadow-yellow-600/20 hover:bg-yellow-700 transition-all flex items-center gap-2 text-lg mb-16"
             >
               Say Hello
               <Mail size={20} />
@@ -63,6 +63,7 @@ export const ContactSection = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 p-3 md:p-4 glass rounded-xl md:rounded-2xl hover:bg-muted transition-all group w-full h-full"
+                  aria-label={social.name}
                 >
                   {social.icon && (
                     <div 

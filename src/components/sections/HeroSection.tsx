@@ -88,7 +88,7 @@ export const HeroSection = () => {
                     .querySelector("#work")
                     ?.scrollIntoView({ behavior: "smooth" });
                 }}
-                className="px-8 py-4 bg-yellow-600 text-white rounded-full font-bold shadow-lg shadow-yellow-600/20 hover:bg-yellow-700 transition-all duration-300 flex items-center justify-center gap-2 group"
+                className="px-8 py-4 bg-yellow-600 text-zinc-950 rounded-full font-bold shadow-lg shadow-yellow-600/20 hover:bg-yellow-700 transition-all duration-300 flex items-center justify-center gap-2 group"
               >
                 {profile.ctaWork}
                 <ArrowUpRight
@@ -119,6 +119,7 @@ export const HeroSection = () => {
                 src={profile.image}
                 alt={profile.name}
                 fill
+                sizes="(max-width: 768px) 280px, (max-width: 1024px) 320px, 360px"
                 className="w-full h-full object-cover rounded-[2rem] filter brightness-95 grayscale-[10%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
                 priority
               />

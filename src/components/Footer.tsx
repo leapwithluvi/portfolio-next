@@ -31,6 +31,7 @@ export const Footer = () => {
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-muted-foreground hover:text-yellow-600 transition-colors"
+                  aria-label={social.name}
                 >
                   <div 
                     className="w-4 h-4 bg-current"
@@ -50,7 +51,7 @@ export const Footer = () => {
 
           {/* Column 2: Navigation */}
           <div className="flex flex-col gap-6">
-            <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-foreground/50">Navigation</h4>
+            <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-foreground/70">Navigation</h3>
             <ul className="flex flex-col gap-3">
               {navLinks.map((link) => (
                 <li key={link.name}>
@@ -65,7 +66,7 @@ export const Footer = () => {
 
           {/* Column 3: Specialized */}
           <div className="flex flex-col gap-6">
-            <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-foreground/50">{footerData.experience.title}</h4>
+            <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-foreground/70">{footerData.experience.title}</h3>
             <ul className="flex flex-col gap-3">
               {footerData.experience.items.map((item, idx) => (
                 <li key={idx}>
@@ -80,13 +81,13 @@ export const Footer = () => {
 
           {/* Column 4: Newsletter/Status */}
           <div className="flex flex-col gap-6">
-            <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-foreground/50">{footerData.presence.title}</h4>
+            <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-foreground/70">{footerData.presence.title}</h3>
             <div className="flex flex-col gap-4">
               <div className="flex items-center gap-3 text-sm text-muted-foreground bg-muted/30 p-3 rounded-xl border border-border/50">
                 <Globe size={16} className="text-yellow-600" />
                 <span>{footerData.presence.availabilityText}</span>
               </div>
-              <div className="flex items-center gap-3 text-[10px] font-bold uppercase tracking-widest text-emerald-500 bg-emerald-500/5 p-3 rounded-xl border border-emerald-500/20">
+              <div className="flex items-center gap-3 text-[10px] font-bold uppercase tracking-widest text-emerald-600 dark:text-emerald-500 bg-emerald-500/5 p-3 rounded-xl border border-emerald-500/20">
                 <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
                 {footerData.presence.statusBadge}
               </div>
