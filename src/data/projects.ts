@@ -1,3 +1,8 @@
+/**
+ * DATA - Projects
+ * Showcase your best projects here. 
+ * Add project details, technologies used, and repository links.
+ */
 export interface Project {
   nameProject: string;
   typeProject: string;

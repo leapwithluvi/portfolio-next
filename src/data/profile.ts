@@ -1,5 +1,8 @@
+/**
+ * DATA - Profile Information
+ * Change name, logoname, title, description, about, and image to your own.
+ */
 export const profile = {
-    // Change name, title, description, image to your own
     logoName: "leapwithluvi",
     name: "Luvi Aprilyansyah Gabriel",
     title: "Fullstack Web Developer & AI/ML Enthusiast",

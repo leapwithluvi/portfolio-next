@@ -1,3 +1,7 @@
+/**
+ * DATA - Experience & Statistics
+ * Edit your working experience and portfolio statistics here.
+ */
 interface JobDetail {
   id: number;
   description: string;
@@ -25,7 +29,7 @@ export const experiences: Experience[] = [
     image: "/images/rivolta.png",
     company: "Rivolta Solusi Teknologi",
     location: "Samarinda",
-    role: "Software Developer - Intern",
+    role: "Software Engineer - Intern",
     duration: "Jun 2025 - Dec 2025",
     details: [
       {

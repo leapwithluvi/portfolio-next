@@ -3,6 +3,7 @@
 import { motion } from "motion/react";
 import { UserRound, Layout, Database, Terminal } from "lucide-react";
 import { profile } from "@/data/profile";
+import { statistics } from "@/data/experience";
 import { GridPattern } from "@/components/ui/grid-pattern";
 
 export const AboutSection = () => {
@@ -80,22 +81,16 @@ export const AboutSection = () => {
             whileInView={{ opacity: 1, x: 0 }}
             className="col-span-1 md:col-span-4 glass p-8 rounded-3xl shadow-xl flex flex-col items-center justify-center gap-8 relative overflow-hidden group"
           >
-            <div className="flex flex-col items-center text-center relative z-10">
-              <span className="text-6xl font-serif font-bold text-yellow-600">
-                10+
-              </span>
-              <span className="text-sm font-semibold uppercase tracking-widest text-muted-foreground mt-2">
-                Projects Completed
-              </span>
-            </div>
-            <div className="flex flex-col items-center text-center relative z-10">
-              <span className="text-6xl font-serif font-bold text-teal-600">
-                95%
-              </span>
-              <span className="text-sm font-semibold uppercase tracking-widest text-muted-foreground mt-2">
-                Code Quality Score
-              </span>
-            </div>
+            {statistics.slice(0, 2).map((stat, idx) => (
+              <div key={idx} className="flex flex-col items-center text-center relative z-10 w-full">
+                <span className={`text-6xl font-serif font-bold ${idx === 0 ? "text-yellow-600" : "text-teal-600"}`}>
+                  {stat.value}
+                </span>
+                <span className="text-sm font-semibold uppercase tracking-widest text-muted-foreground mt-2">
+                  {stat.label}
+                </span>
+              </div>
+            ))}
           </motion.div>
 
           {/* Skills Highlights */}

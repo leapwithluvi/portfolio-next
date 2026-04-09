@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { techStack, skills } from "@/data/techstack";
 import { GridPattern } from "@/components/ui/grid-pattern";
+import Link from "next/link";
  
 const IconMap = {
   LayoutPanelLeft: LayoutPanelLeft,
@@ -172,14 +173,16 @@ export const SkillsSection = () => {
               title={stack.name}
               className="flex justify-center flex-col items-center group cursor-default"
             >
-              <img
-                src={stack.logo}
-                alt={stack.name}
-                className="w-8 h-8 opacity-40 transition-all duration-300 grayscale group-hover:opacity-100 group-hover:grayscale-0 scale-90 group-hover:scale-110"
-              />
-              <span className="text-[10px] mt-2 opacity-0 group-hover:opacity-100 transition-all duration-300 uppercase tracking-widest font-bold">
-                {stack.name}
-              </span>
+              <Link href={stack.url} target="_blank" rel="noopener noreferrer">
+                <img
+                  src={stack.logo}
+                  alt={stack.name}
+                  className="w-8 h-8 opacity-40 transition-all duration-300 grayscale group-hover:opacity-100 group-hover:grayscale-0 scale-90 group-hover:scale-110"
+                />
+              </Link>
+                <span className="text-[10px] mt-2 opacity-0 group-hover:opacity-100 transition-all duration-300 uppercase tracking-widest font-bold">
+                  {stack.name}
+                </span>
             </div>
           ))}
         </div>

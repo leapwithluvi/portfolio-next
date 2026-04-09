@@ -1,4 +1,8 @@
-// Change title, description, keywords, author, url, image to your own
+/**
+ * DATA - SEO Metadata
+ * Change title, description, keywords, author, url, image, and twitterHandle to your own.
+ * This information is used for search engines and social media previews.
+ */
 export const seo = {
     title: "Luvi Aprilyansyah Gabriel | Fullstack Developer & AI/ML Engineer",
     description: "Portfolio of Luvi Aprilyansyah Gabriel — a Fullstack Developer specializing in React, Next.js, Node.js, Express, TypeScript, and AI/ML technologies. Building scalable web applications and intelligent digital solutions.",

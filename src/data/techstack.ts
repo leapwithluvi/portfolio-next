@@ -1,10 +1,15 @@
+/**
+ * DATA - Tech Stack & Skills
+ * Define your tech stack and group them into skill categories.
+ * You can use DevIcons (https://devicon.dev/) for the logos.
+ */
 type TechCategory =
     | "language"
     | "frontend"
     | "backend"
-    | "database" // Khusus Engine DB
-    | "devops"   // Ganti tools menjadi lebih spesifik (Vercel, Railway, Git)
-    | "library"  // Untuk tools pendukung seperti Prisma, Framer, dll
+    | "database" 
+    | "devops"   
+    | "library"  
     | "ai_ml";
 
 interface TechStack {

@@ -40,10 +40,12 @@ export const Navbar: React.FC = () => {
  
   return (
     <>
-    <nav className="fixed top-8 left-1/2 -translate-x-1/2 z-[999] w-full max-w-[1280px] px-4 md:px-12 pointer-events-auto">
+    <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-[999] w-full max-w-[1280px] px-4 md:px-6 pointer-events-auto">
         <motion.div
-          className={`flex items-center justify-between gap-6 px-6 py-3 rounded-full border border-border shadow-lg glass transition-all duration-300 ${
-            isScrolled ? "scale-95 px-4" : "scale-100"
+          className={`flex items-center justify-between gap-6 px-6 py-3 rounded-full border transition-all duration-500 ${
+            isScrolled 
+              ? "bg-background/80 backdrop-blur-xl border-border/80 shadow-2xl scale-[0.98] py-2" 
+              : "bg-background/40 backdrop-blur-md border-border/40 shadow-lg scale-100"
           }`}
           initial={{ y: -50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}

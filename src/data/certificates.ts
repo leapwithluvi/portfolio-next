@@ -1,3 +1,7 @@
+/**
+ * DATA - Certificates
+ * List your certifications and training here.
+ */
 export interface Certificate {
   title: string;
   issuer: string;
