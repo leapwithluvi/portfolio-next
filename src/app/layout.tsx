@@ -16,12 +16,27 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(seo.url),
   title: {
     default: seo.title,
     template: `%s | ${seo.author}`,
   },
   description: seo.description,
   keywords: seo.keywords,
+  authors: [{ name: seo.author, url: seo.url }],
+  creator: seo.author,
+  publisher: seo.author,
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
   openGraph: {
     title: seo.title,
     description: seo.description,
@@ -37,7 +52,27 @@ export const metadata: Metadata = {
         alt: seo.author,
       },
     ],
-  }
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: seo.title,
+    description: seo.description,
+    images: [seo.image],
+    creator: seo.twitterHandle,
+  },
+  icons: {
+    icon: [
+      { url: '/favicon.ico' },
+      { url: '/images/icon.png', sizes: '32x32', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/images/icon.png' },
+    ],
+  },
+  manifest: '/manifest.json',
+  alternates: {
+    canonical: seo.url,
+  },
 };
 
 export default function RootLayout({
@@ -60,6 +95,47 @@ export default function RootLayout({
                 } catch (e) {}
               })();
             `,
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              "name": seo.author,
+              "url": seo.url,
+              "image": `${seo.url}${seo.image}`,
+              "sameAs": [
+                "https://github.com/leapwithluvi",
+                "https://www.linkedin.com/in/leapwithluvi",
+                "https://www.instagram.com/leapwithluvi",
+                "https://www.twitter.com/leapwithluvi"
+              ],
+              "jobTitle": "Fullstack Developer & AI/ML Engineer",
+              "worksFor": {
+                "@type": "Organization",
+                "name": "Freelance"
+              },
+              "description": seo.description
+            })
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "name": seo.title,
+              "url": seo.url,
+              "author": {
+                "@type": "Person",
+                "name": seo.author
+              },
+              "description": seo.description,
+              "keywords": seo.keywords
+            })
           }}
         />
       </head>
