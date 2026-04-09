@@ -8,7 +8,10 @@ import { GridPattern } from "@/components/ui/grid-pattern";
 
 export const AboutSection = () => {
   return (
-    <section className="relative w-full py-16 overflow-hidden" id="about">
+    <section
+      className="flex justify-center items-center h-auto px-6 md:px-12 py-12 overflow-hidden"
+      id="about"
+    >
       <GridPattern
         width={30}
         height={30}
@@ -39,7 +42,7 @@ export const AboutSection = () => {
         >
           {/* Judul */}
           <motion.div
-            className="flex items-center gap-3 mb-6"
+            className="flex justify-center md:justify-start items-center gap-4 mb-8"
             initial={{ opacity: 0, y: -30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}

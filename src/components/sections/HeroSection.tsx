@@ -6,13 +6,13 @@ import Image from "next/image";
 import { Sidebar } from "@/components/Sidebar";
 import { profile } from "@/data/profile";
 
-const HeroImage = motion.create(Image);
+const HeroImage = motion(Image);
 
 export const HeroSection = () => {
   return (
     <section
       id="home"
-      className="relative w-full py-32 md:py-32 overflow-hidden"
+      className="flex justify-center items-center h-auto py-32 md:py-32 overflow-hidden"
     >
       <div className="max-container flex items-center gap-8 md:gap-16 px-6 md:px-12 lg:px-24">
         <motion.div

@@ -48,7 +48,7 @@ export const ProjectSection = () => {
         <div className="flex flex-col w-full">
           {/* Section Header */}
           <motion.div
-            className="flex items-center gap-2 mb-8"
+            className="flex justify-center md:justify-start items-center gap-4"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}

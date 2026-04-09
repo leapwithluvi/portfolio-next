@@ -47,7 +47,7 @@ export const ExperienceSection = () => {
                   transition={{ duration: 0.5, delay: 0.2 * index }}
                   viewport={{ once: true }}
                 >
-                  <span className="text-5xl font-serif font-bold text-foreground">
+                  <span className="text-4xl font-serif font-bold text-foreground">
                     {item.value}
                   </span>
                   <p className="text-sm font-serif md:text-2xl text-muted-foreground mt-2">
