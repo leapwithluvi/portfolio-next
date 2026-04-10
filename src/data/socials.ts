@@ -24,7 +24,7 @@ export const socials = [
     icon: "https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/instagram.svg",
   },
   {
-    name: "Twitter",
+    name: "X",
     href: "https://x.com/itsluvi13",
     icon: "https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/x.svg",
   },

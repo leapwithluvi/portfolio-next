@@ -4,6 +4,8 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Award, ExternalLink, Calendar, Folders } from "lucide-react";
 import { certificates } from "@/data/certificates";
+import { profile } from "@/data/profile";
+import { sectionContent } from "@/data/sections";
 import { useIsMobile } from "@/hooks/use-is-mobile";
  
 const categories = ["All", ...Array.from(new Set(certificates.map((c) => c.category)))];
@@ -32,7 +34,7 @@ export const CertificateSection = () => {
             className="flex items-center gap-2 mb-4 text-yellow-600 font-bold uppercase tracking-widest text-xs"
           >
             <Award size={16} />
-            <span>Verifiable Skills</span>
+            <span>{sectionContent.certificates.badge}</span>
           </motion.div>
           
           <motion.h2
@@ -42,7 +44,7 @@ export const CertificateSection = () => {
             transition={{ delay: 0.2 }}
             className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-foreground mb-6"
           >
-            Certifications
+            {sectionContent.certificates.title}
           </motion.h2>
           
           <motion.p
@@ -52,7 +54,7 @@ export const CertificateSection = () => {
             transition={{ delay: 0.3 }}
             className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl px-4"
           >
-            A collection of my validated expertise from global industry leaders, spanning across Cloud Computing, AI, and Fullstack Engineering.
+            {sectionContent.certificates.description}
           </motion.p>
         </div>
 

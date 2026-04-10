@@ -9,6 +9,8 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { techStack, skills } from "@/data/techstack";
+import { profile } from "@/data/profile";
+import { sectionContent } from "@/data/sections";
 import { GridPattern } from "@/components/ui/grid-pattern";
 import Link from "next/link";
 import { useIsMobile } from "@/hooks/use-is-mobile";
@@ -63,7 +65,7 @@ export const SkillsSection = () => {
             className="flex items-center gap-2 mb-4 text-yellow-600 font-bold uppercase tracking-widest text-xs"
           >
             <Clock3 size={16} />
-            <span>Modern Tech Stack</span>
+            <span>{sectionContent.skills.badge}</span>
           </motion.div>
  
           <motion.h2
@@ -73,7 +75,7 @@ export const SkillsSection = () => {
             transition={{ delay: 0.2 }}
             className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-foreground mb-6"
           >
-            My Tech Arsenal
+            {sectionContent.skills.title}
           </motion.h2>
  
           <motion.p
@@ -83,7 +85,7 @@ export const SkillsSection = () => {
             transition={{ delay: 0.3 }}
             className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl"
           >
-            A high-performance architecture built with the best tools in the industry.
+            {sectionContent.skills.description}
           </motion.p>
         </div>
  

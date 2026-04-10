@@ -6,7 +6,10 @@ import { Folders } from "lucide-react";
 import { projects } from "@/data/projects";
 import { ProjectCard } from "@/components/ProjectCard";
 import Magnetic from "@/components/ui/Magnetic";
+import { profile } from "@/data/profile";
+import { sectionContent } from "@/data/sections";
 import { useIsMobile } from "@/hooks/use-is-mobile";
+import { contactJsonData } from "@/data/contact_json";
  
 const categories = ["All", ...Array.from(new Set(projects.map((p) => p.typeProject)))];
  
@@ -33,7 +36,7 @@ export const ProjectSection = () => {
             className="flex items-center gap-2 mb-4 text-yellow-600 font-bold uppercase tracking-widest text-xs"
           >
             <Folders size={16} />
-            <span>Showcase of Craft</span>
+            <span>{sectionContent.projects.badge}</span>
           </motion.div>
           
           <motion.h2
@@ -43,7 +46,7 @@ export const ProjectSection = () => {
             transition={{ delay: 0.2 }}
             className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-foreground mb-6"
           >
-            Recent Works
+            {sectionContent.projects.title}
           </motion.h2>
           
           <motion.p
@@ -53,7 +56,7 @@ export const ProjectSection = () => {
             transition={{ delay: 0.3 }}
             className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl px-4"
           >
-            Explore a selection of my favorite projects, ranging from AI experimentation to full-scale web solutions.
+            {sectionContent.projects.description}
           </motion.p>
         </div>
  
@@ -114,12 +117,12 @@ export const ProjectSection = () => {
         >
           <div className="absolute inset-0 bg-yellow-600/[0.03] backdrop-blur-3xl -z-10" />
           
-          <h3 className="text-3xl md:text-5xl font-serif font-bold text-center">Interested in Collaboration?</h3>
-          <p className="text-lg text-muted-foreground text-center max-w-lg mb-4">Let&apos;s build something impactful together. I&apos;m currently open to freelance opportunities and full-time positions.</p>
+          <h3 className="text-3xl md:text-5xl font-serif font-bold text-center">{sectionContent.projects.footerTitle}</h3>
+          <p className="text-lg text-muted-foreground text-center max-w-lg mb-4">{sectionContent.projects.footerDescription}</p>
           
           <Magnetic>
             <a
-              href="mailto:luviaprilyansyahg@gmail.com"
+              href={`mailto:${contactJsonData.contact.email}`}
               className="px-10 py-5 bg-yellow-600 text-white rounded-full font-bold shadow-xl shadow-yellow-600/20 hover:bg-yellow-700 hover:scale-105 transition-all duration-300"
             >
               Get In Touch

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { seo } from "@/data/seo";
+import { seo, personJsonLd, projectJsonLd, serviceJsonLd } from "@/data/seo";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import Spotlight from "@/components/ui/Spotlight";
@@ -13,9 +13,7 @@ import Preloader from "@/components/Preloader";
 import SectionNav from "@/components/SectionNav";
 import CustomCursor from "@/components/CustomCursor";
 import { Grain } from "@/components/ui/Grain";
-import { contactJsonData } from "@/data/contact_json";
 import Script from "next/script";
-import { profile } from "@/data/profile";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -112,27 +110,22 @@ export default function RootLayout({
           type="application/ld+json"
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Person",
-              "name": seo.author,
-              "url": seo.url,
-              "image": `${seo.url}${seo.image}`,
-              "sameAs": [
-                `https://github.com/${contactJsonData.contact.github}`,
-                `https://www.linkedin.com/in/${contactJsonData.contact.linkedin}`,
-                `https://www.instagram.com/${contactJsonData.contact.instagram}`,
-                `https://x.com/${contactJsonData.contact.x}`
-              ],
-              "jobTitle": profile.title,
-              "worksFor": {
-                "@type": "Organization",
-                "name": "Freelance"
-              },
-              "description": seo.description
-            }),
+            __html: JSON.stringify(personJsonLd),
           }}
         />
+
+        {/* SEO JSON-LD Projects */}
+        {projectJsonLd.map((project, index) => (
+          <Script
+            key={`ld-json-project-${index}`}
+            id={`ld-json-project-${index}`}
+            type="application/ld+json"
+            strategy="afterInteractive"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(project),
+            }}
+          />
+        ))}
 
         {/* SEO JSON-LD WebSite */}
         <Script
@@ -152,6 +145,16 @@ export default function RootLayout({
               "description": seo.description,
               "keywords": seo.keywords
             }),
+          }}
+        />
+
+        {/* SEO JSON-LD Professional Service */}
+        <Script
+          id="ld-json-service"
+          type="application/ld+json"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(serviceJsonLd),
           }}
         />
 

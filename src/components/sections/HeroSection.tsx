@@ -4,6 +4,7 @@ import { motion } from "motion/react";
 import { ArrowUpRight, Download, Code2 } from "lucide-react";
 import Image from "next/image";
 import { profile } from "@/data/profile";
+import { sectionContent } from "@/data/sections";
 import { GridPattern } from "@/components/ui/grid-pattern";
 import Magnetic from "@/components/ui/Magnetic";
  
@@ -54,9 +55,9 @@ export const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            {profile.heroHeadingBefore}{" "}
-            <span className="text-yellow-600">{profile.heroHeadingAccent}</span>{" "}
-            {profile.heroHeadingAfter}
+            {sectionContent.hero.headingBefore}{" "}
+            <span className="text-yellow-600">{sectionContent.hero.headingAccent}</span>{" "}
+            {sectionContent.hero.headingAfter}
           </motion.h1>
 
           <motion.p
@@ -65,11 +66,11 @@ export const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.8 }}
           >
-            I&apos;m{" "}
+            {sectionContent.hero.intro}{" "}
             <span className="text-foreground font-semibold">
               {profile.name}
             </span>
-            , {profile.heroTagline}
+            , {sectionContent.hero.tagline}
           </motion.p>
 
           {/* CTAs */}
@@ -90,7 +91,7 @@ export const HeroSection = () => {
                 }}
                 className="w-full sm:w-auto px-8 py-4 bg-yellow-600 text-zinc-950 rounded-full font-bold shadow-lg shadow-yellow-600/20 hover:bg-yellow-700 transition-all duration-300 flex items-center justify-center gap-2 group"
               >
-                {profile.ctaWork}
+                {sectionContent.hero.ctaWork}
                 <ArrowUpRight
                   size={20}
                   className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"
@@ -98,10 +99,15 @@ export const HeroSection = () => {
               </a>
             </Magnetic>
             <Magnetic>
-              <button className="w-full sm:w-auto px-8 py-4 bg-background border border-border text-foreground rounded-full font-bold glass hover:bg-muted transition-all duration-300 flex items-center justify-center gap-2">
+              <a 
+                href={profile.resumeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto px-8 py-4 bg-background border border-border text-foreground rounded-full font-bold glass hover:bg-muted transition-all duration-300 flex items-center justify-center gap-2"
+              >
                 <Download size={20} />
-                {profile.ctaResume}
-              </button>
+                {sectionContent.hero.ctaResume}
+              </a>
             </Magnetic>
           </motion.div>
         </div>
@@ -117,7 +123,7 @@ export const HeroSection = () => {
             <div className="relative glass rounded-[3rem] p-4 shadow-2xl overflow-hidden aspect-[4/5] w-[280px] md:w-[320px] lg:w-[360px]">
               <HeroImage
                 src={profile.image}
-                alt={profile.name}
+                alt={`${profile.name} - Software Engineering Student at ${profile.education}`}
                 fill
                 quality={85}
                 sizes="(max-width: 768px) 280px, 400px"

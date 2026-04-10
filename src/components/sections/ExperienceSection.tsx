@@ -4,6 +4,8 @@ import { motion } from "motion/react";
 import { Workflow, Award, Calendar, MapPin, Briefcase } from "lucide-react";
 import { experiences, statistics } from "@/data/experience";
 import { ExperienceCard } from "@/components/ExperienceCard";
+import { profile } from "@/data/profile";
+import { sectionContent } from "@/data/sections";
 import { useIsMobile } from "@/hooks/use-is-mobile";
  
 export const ExperienceSection = () => {
@@ -28,7 +30,7 @@ export const ExperienceSection = () => {
                 className="flex items-center gap-2 text-yellow-600 font-bold uppercase tracking-widest text-xs"
               >
                 <Workflow size={16} strokeWidth={1.5} />
-                <span>Career Journey</span>
+                <span>{sectionContent.experience.badge}</span>
               </motion.div>
               
               <motion.h2
@@ -38,8 +40,11 @@ export const ExperienceSection = () => {
                 transition={{ delay: 0.1 }}
                 className="text-4xl md:text-5xl lg:text-7xl font-serif font-bold text-foreground leading-[1.1]"
               >
-                Work & <br />
-                <span className="text-muted-foreground/30">Experience</span>
+                {sectionContent.experience.title.split(" & ").map((part: string, i: number) => (
+                  <span key={i}>
+                    {part} {i === 0 && <br />}
+                  </span>
+                ))}
               </motion.h2>
               
               <motion.p
@@ -49,7 +54,7 @@ export const ExperienceSection = () => {
                 transition={{ delay: 0.2 }}
                 className="text-lg text-muted-foreground leading-relaxed text-justify lg:text-left"
               >
-                A documented trail of my professional evolution, focusing on building high-performance systems and exploring the boundaries of AI integration in modern web architectures.
+                {sectionContent.experience.description}
               </motion.p>
             </div>
 

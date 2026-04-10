@@ -3,6 +3,7 @@
 import { motion } from "motion/react";
 import { UserRound, Layout, Database, Terminal } from "lucide-react";
 import { profile } from "@/data/profile";
+import { sectionContent } from "@/data/sections";
 import { statistics } from "@/data/experience";
 import { GridPattern } from "@/components/ui/grid-pattern";
 import { useIsMobile } from "@/hooks/use-is-mobile";
@@ -42,7 +43,7 @@ export const AboutSection = () => {
             className="flex items-center gap-2 mb-4 text-yellow-600 font-bold uppercase tracking-widest text-xs"
           >
             <UserRound size={16} />
-            <span>Know Me Better</span>
+            <span>{sectionContent.about.badge}</span>
           </motion.div>
 
           <motion.h2
@@ -52,7 +53,7 @@ export const AboutSection = () => {
             transition={{ delay: 0.2 }}
             className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-foreground mb-6"
           >
-            Behind the Code
+            {sectionContent.about.title}
           </motion.h2>
 
           <motion.p
@@ -62,9 +63,7 @@ export const AboutSection = () => {
             transition={{ delay: 0.3 }}
             className="text-lg md:text-xl text-muted-foreground leading-relaxed"
           >
-            I&apos;m a versatile developer who bridges the gap between complex
-            engineering and elegant design. Currently focusing on building
-            accessible, high-performance web applications.
+            {sectionContent.about.description}
           </motion.p>
         </div>
 
@@ -78,13 +77,13 @@ export const AboutSection = () => {
             className="col-span-1 md:col-span-8 glass p-6 md:p-8 rounded-3xl shadow-xl flex flex-col gap-6"
           >
             <h3 className="text-3xl font-serif font-bold text-foreground">
-              My Craft
+              {sectionContent.about.craftTitle}
             </h3>
             <p className="text-lg text-muted-foreground leading-relaxed text-justify">
-              {profile.about1}
+              {profile.bio.about1}
             </p>
             <p className="text-lg text-muted-foreground leading-relaxed text-justify">
-              {profile.about2}
+              {profile.bio.about2}
             </p>
           </motion.div>
 
@@ -117,10 +116,9 @@ export const AboutSection = () => {
             <div className="p-4 bg-yellow-600/10 rounded-2xl text-yellow-600">
               <Layout size={32} />
             </div>
-            <h4 className="text-xl font-bold font-serif">UI/UX Fanatic</h4>
+            <h4 className="text-xl font-bold font-serif">{sectionContent.about.card1Title}</h4>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              {" "}
-              obsessed with pixel-perfect designs and smooth user flows.
+              {sectionContent.about.card1Desc}
             </p>
           </motion.div>
 
@@ -134,10 +132,9 @@ export const AboutSection = () => {
             <div className="p-4 bg-teal-600/10 rounded-2xl text-teal-600">
               <Database size={32} />
             </div>
-            <h4 className="text-xl font-bold font-serif">Fullstack Ready</h4>
+            <h4 className="text-xl font-bold font-serif">{sectionContent.about.card2Title}</h4>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              Building scalable backends and secure APIs with modern Node
-              architectures.
+              {sectionContent.about.card2Desc}
             </p>
           </motion.div>
 
@@ -151,10 +148,9 @@ export const AboutSection = () => {
             <div className="p-4 bg-indigo-600/10 rounded-2xl text-indigo-600">
               <Terminal size={32} />
             </div>
-            <h4 className="text-xl font-bold font-serif">Clean Code</h4>
+            <h4 className="text-xl font-bold font-serif">{sectionContent.about.card3Title}</h4>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              Writing maintainable, well-documented, and efficient TypeScript
-              code.
+              {sectionContent.about.card3Desc}
             </p>
           </motion.div>
         </div>

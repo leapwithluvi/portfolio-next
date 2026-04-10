@@ -1,3 +1,5 @@
+import { profile } from "./profile";
+
 /**
  * DATA - Footer
  * Customize the multi-column footer content here.
@@ -5,7 +7,7 @@
 
 export const footerData = {
   brand: {
-    tagline: "Fullstack Web Developer pushing the boundaries of web engineering and AI integration. Crafting premium digital experiences with precision.",
+    tagline: `${profile.title} pushing the boundaries of web engineering and AI integration. Crafting premium digital experiences with precision.`,
   },
   experience: {
     title: "Experience",
@@ -18,10 +20,6 @@ export const footerData = {
         title: "AI / Machine Learning",
         description: "Python, TensorFlow, LLMs",
       },
-      {
-        title: "System Design",
-        description: "Scalable Architecture",
-      },
     ],
   },
   presence: {
@@ -30,6 +28,6 @@ export const footerData = {
     availabilityText: "Available for Worldwide Remote Projects",
   },
   bottom: {
-    creditText: "Designed and Engineered by leapwithluvi.",
+    creditText: `Designed and Engineered by ${profile.logoName}.`,
   }
 };

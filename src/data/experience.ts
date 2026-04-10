@@ -27,7 +27,7 @@ export const statistics = [
 
 export const experiences: Experience[] = [
   {
-    image: "/images/rivolta.png",
+    image: "/images/experience/rivolta.webp",
     company: "Rivolta Solusi Teknologi",
     location: "Samarinda",
     role: "Software Engineer - Intern",

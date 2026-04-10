@@ -53,7 +53,7 @@ export const techStack: TechStack[] = [
     url: "https://react.dev/",
   },
   {
-    name: "NextJS",
+    name: "Next.js",
     category: "frontend",
     type: "React Framework",
     logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg",

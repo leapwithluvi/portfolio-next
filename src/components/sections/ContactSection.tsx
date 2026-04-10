@@ -3,6 +3,7 @@
 import { motion } from "motion/react";
 import { Mail, MessageSquare } from "lucide-react";
 import { profile } from "@/data/profile";
+import { sectionContent } from "@/data/sections";
 import { socials } from "@/data/socials";
 import JsonContactCard from "@/components/JsonContactCard";
 import Magnetic from "@/components/ui/Magnetic";
@@ -23,16 +24,15 @@ export const ContactSection = () => {
         >
           <div className="flex items-center gap-2 mb-4 text-yellow-600 font-bold uppercase tracking-widest text-xs">
             <MessageSquare size={16} />
-            <span>Open for Collaboration</span>
+            <span>{sectionContent.contact.badge}</span>
           </div>
           
           <h2 className="text-3xl md:text-6xl lg:text-7xl font-serif font-bold text-foreground mb-6 leading-tight">
-            Let&apos;s Build the Future Together.
+            {sectionContent.contact.title}
           </h2>
  
           <p className="text-base md:text-xl text-muted-foreground leading-relaxed mb-10 max-w-xl text-center">
-            Whether you have a question or just want to say hi, my inbox is always open. 
-            I&apos;m currently looking for new opportunities.
+            {sectionContent.contact.description}
           </p>
  
           {/* Main Action Call */}
