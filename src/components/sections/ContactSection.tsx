@@ -6,8 +6,10 @@ import { profile } from "@/data/profile";
 import { socials } from "@/data/socials";
 import JsonContactCard from "@/components/JsonContactCard";
 import Magnetic from "@/components/ui/Magnetic";
+import { useIsMobile } from "@/hooks/use-is-mobile";
  
 export const ContactSection = () => {
+  const isMobile = useIsMobile();
   return (
     <section id="contact" className="relative w-full py-24 overflow-hidden">
       <div className="max-container flex flex-col items-center">
@@ -16,6 +18,7 @@ export const ContactSection = () => {
           className="flex flex-col items-center text-center max-w-5xl px-4"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: isMobile }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <div className="flex items-center gap-2 mb-4 text-yellow-600 font-bold uppercase tracking-widest text-xs">
@@ -48,6 +51,7 @@ export const ContactSection = () => {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: isMobile }}
             transition={{ delay: 0.4 }}
             className="w-full"
           >

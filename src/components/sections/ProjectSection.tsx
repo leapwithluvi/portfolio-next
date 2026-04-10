@@ -6,10 +6,12 @@ import { Folders } from "lucide-react";
 import { projects } from "@/data/projects";
 import { ProjectCard } from "@/components/ProjectCard";
 import Magnetic from "@/components/ui/Magnetic";
+import { useIsMobile } from "@/hooks/use-is-mobile";
  
 const categories = ["All", ...Array.from(new Set(projects.map((p) => p.typeProject)))];
  
 export const ProjectSection = () => {
+  const isMobile = useIsMobile();
   const [activeTab, setActiveTab] = useState<string>("All");
  
   const filteredProjects = activeTab === "All" 
@@ -27,6 +29,7 @@ export const ProjectSection = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: isMobile }}
             className="flex items-center gap-2 mb-4 text-yellow-600 font-bold uppercase tracking-widest text-xs"
           >
             <Folders size={16} />
@@ -36,6 +39,7 @@ export const ProjectSection = () => {
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: isMobile }}
             transition={{ delay: 0.2 }}
             className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-foreground mb-6"
           >
@@ -45,6 +49,7 @@ export const ProjectSection = () => {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: isMobile }}
             transition={{ delay: 0.3 }}
             className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl px-4"
           >
@@ -57,6 +62,7 @@ export const ProjectSection = () => {
           className="flex flex-wrap items-center justify-center p-2 gap-2 bg-muted/30 dark:bg-muted/10 rounded-full border border-border/50 glass animate-in fade-in duration-500"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: isMobile }}
           transition={{ delay: 0.4 }}
         >
           {categories.map((tab) => (
@@ -104,6 +110,7 @@ export const ProjectSection = () => {
           className="mt-24 p-12 w-full max-w-6xl rounded-[3rem] glass flex flex-col items-center gap-6 relative overflow-hidden group shadow-2xl"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: isMobile }}
         >
           <div className="absolute inset-0 bg-yellow-600/[0.03] backdrop-blur-3xl -z-10" />
           

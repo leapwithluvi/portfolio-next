@@ -74,7 +74,7 @@ export const HeroSection = () => {
 
           {/* CTAs */}
           <motion.div
-            className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start w-full"
+            className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start w-full px-4 sm:px-0"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.8 }}
@@ -88,7 +88,7 @@ export const HeroSection = () => {
                     .querySelector("#work")
                     ?.scrollIntoView({ behavior: "smooth" });
                 }}
-                className="px-8 py-4 bg-yellow-600 text-zinc-950 rounded-full font-bold shadow-lg shadow-yellow-600/20 hover:bg-yellow-700 transition-all duration-300 flex items-center justify-center gap-2 group"
+                className="w-full sm:w-auto px-8 py-4 bg-yellow-600 text-zinc-950 rounded-full font-bold shadow-lg shadow-yellow-600/20 hover:bg-yellow-700 transition-all duration-300 flex items-center justify-center gap-2 group"
               >
                 {profile.ctaWork}
                 <ArrowUpRight
@@ -98,7 +98,7 @@ export const HeroSection = () => {
               </a>
             </Magnetic>
             <Magnetic>
-              <button className="px-8 py-4 bg-background border border-border text-foreground rounded-full font-bold glass hover:bg-muted transition-all duration-300 flex items-center justify-center gap-2">
+              <button className="w-full sm:w-auto px-8 py-4 bg-background border border-border text-foreground rounded-full font-bold glass hover:bg-muted transition-all duration-300 flex items-center justify-center gap-2">
                 <Download size={20} />
                 {profile.ctaResume}
               </button>

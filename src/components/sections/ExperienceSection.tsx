@@ -4,8 +4,10 @@ import { motion } from "motion/react";
 import { Workflow, Award, Calendar, MapPin, Briefcase } from "lucide-react";
 import { experiences, statistics } from "@/data/experience";
 import { ExperienceCard } from "@/components/ExperienceCard";
+import { useIsMobile } from "@/hooks/use-is-mobile";
  
 export const ExperienceSection = () => {
+  const isMobile = useIsMobile();
   return (
     <section
       id="experience"
@@ -22,6 +24,7 @@ export const ExperienceSection = () => {
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: isMobile }}
                 className="flex items-center gap-2 text-yellow-600 font-bold uppercase tracking-widest text-xs"
               >
                 <Workflow size={16} strokeWidth={1.5} />
@@ -31,6 +34,7 @@ export const ExperienceSection = () => {
               <motion.h2
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: isMobile }}
                 transition={{ delay: 0.1 }}
                 className="text-4xl md:text-5xl lg:text-7xl font-serif font-bold text-foreground leading-[1.1]"
               >
@@ -41,6 +45,7 @@ export const ExperienceSection = () => {
               <motion.p
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: isMobile }}
                 transition={{ delay: 0.2 }}
                 className="text-lg text-muted-foreground leading-relaxed text-justify lg:text-left"
               >
@@ -55,6 +60,7 @@ export const ExperienceSection = () => {
                   key={index}
                   initial={{ opacity: 0, scale: 0.9 }}
                   whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: isMobile }}
                   transition={{ delay: 0.3 + index * 0.1 }}
                   className="p-6 glass rounded-2xl flex flex-col gap-1 border border-border/40"
                 >
@@ -80,7 +86,7 @@ export const ExperienceSection = () => {
                     delay: 0.1 * index,
                     ease: [0.16, 1, 0.3, 1] 
                   }}
-                  viewport={{ once: true, margin: "-100px" }}
+                  viewport={{ once: isMobile, margin: "-100px" }}
                 >
                   <ExperienceCard data={exp} />
                 </motion.div>

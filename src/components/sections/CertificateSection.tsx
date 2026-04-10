@@ -4,10 +4,12 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Award, ExternalLink, Calendar, Folders } from "lucide-react";
 import { certificates } from "@/data/certificates";
+import { useIsMobile } from "@/hooks/use-is-mobile";
  
 const categories = ["All", ...Array.from(new Set(certificates.map((c) => c.category)))];
 
 export const CertificateSection = () => {
+  const isMobile = useIsMobile();
   const [activeTab, setActiveTab] = useState<string>("All");
 
   const filteredCertificates = activeTab === "All"
@@ -26,6 +28,7 @@ export const CertificateSection = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: isMobile }}
             className="flex items-center gap-2 mb-4 text-yellow-600 font-bold uppercase tracking-widest text-xs"
           >
             <Award size={16} />
@@ -35,6 +38,7 @@ export const CertificateSection = () => {
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: isMobile }}
             transition={{ delay: 0.2 }}
             className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-foreground mb-6"
           >
@@ -44,6 +48,7 @@ export const CertificateSection = () => {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: isMobile }}
             transition={{ delay: 0.3 }}
             className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl px-4"
           >
@@ -56,6 +61,7 @@ export const CertificateSection = () => {
           className="flex flex-wrap items-center justify-center p-2 gap-2 bg-muted/30 dark:bg-muted/10 rounded-full border border-border/50 glass animate-in fade-in duration-500"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: isMobile }}
           transition={{ delay: 0.4 }}
         >
           {categories.map((tab) => (

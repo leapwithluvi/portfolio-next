@@ -11,6 +11,7 @@ import {
 import { techStack, skills } from "@/data/techstack";
 import { GridPattern } from "@/components/ui/grid-pattern";
 import Link from "next/link";
+import { useIsMobile } from "@/hooks/use-is-mobile";
  
 const IconMap = {
   LayoutPanelLeft: LayoutPanelLeft,
@@ -20,6 +21,7 @@ const IconMap = {
 };
  
 export const SkillsSection = () => {
+  const isMobile = useIsMobile();
   // Split tech stack into two for Dual Marquee (Enterprise Style)
   const firstHalf = techStack.slice(0, Math.ceil(techStack.length / 2));
   const secondHalf = techStack.slice(Math.ceil(techStack.length / 2));
@@ -57,6 +59,7 @@ export const SkillsSection = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: isMobile }}
             className="flex items-center gap-2 mb-4 text-yellow-600 font-bold uppercase tracking-widest text-xs"
           >
             <Clock3 size={16} />
@@ -66,6 +69,7 @@ export const SkillsSection = () => {
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: isMobile }}
             transition={{ delay: 0.2 }}
             className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-foreground mb-6"
           >
@@ -75,6 +79,7 @@ export const SkillsSection = () => {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: isMobile }}
             transition={{ delay: 0.3 }}
             className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl"
           >
@@ -92,6 +97,7 @@ export const SkillsSection = () => {
                 key={category.title}
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: isMobile }}
                 transition={{ delay: index * 0.1 }}
                 className="glass p-6 md:p-8 rounded-3xl shadow-xl flex flex-col gap-6 group hover:translate-y-[-4px] transition-all duration-300 border border-border/50 overflow-hidden"
               >
@@ -132,7 +138,7 @@ export const SkillsSection = () => {
               transition={{
                 repeat: Infinity,
                 ease: "linear",
-                duration: 35,
+                duration: 45,
               }}
               whileHover={{ animationPlayState: "paused" }}
             >
@@ -156,7 +162,7 @@ export const SkillsSection = () => {
               transition={{
                 repeat: Infinity,
                 ease: "linear",
-                duration: 40,
+                duration: 50,
               }}
               whileHover={{ animationPlayState: "paused" }}
             >

@@ -112,12 +112,12 @@ export default function Preloader() {
     <AnimatePresence mode="wait">
       {isLoading && (
         <div className="fixed inset-0 z-[9999] pointer-events-none">
-          {/* Layer 1: Gray Background Shade */}
+          {/* Layer 1: Gray Background Shade - Desktop Only */}
           <motion.div
             variants={getLayerVariants(0.4)}
             initial="initial"
             exit="exit"
-            className="absolute inset-0 z-10 bg-neutral-900"
+            className="absolute inset-0 z-10 bg-neutral-900 hidden md:block"
           >
             <svg className="absolute top-[99.5%] w-full h-[200px] fill-neutral-900">
               <motion.path
@@ -128,12 +128,12 @@ export default function Preloader() {
             </svg>
           </motion.div>
           
-          {/* Layer 2: Yellow Accent Shade */}
+          {/* Layer 2: Yellow Accent Shade - Desktop Only */}
           <motion.div
             variants={getLayerVariants(0.2)}
             initial="initial"
             exit="exit"
-            className="absolute inset-0 z-20 bg-yellow-600"
+            className="absolute inset-0 z-20 bg-yellow-600 hidden md:block"
           >
             <svg className="absolute top-[99.5%] w-full h-[200px] fill-yellow-600">
               <motion.path

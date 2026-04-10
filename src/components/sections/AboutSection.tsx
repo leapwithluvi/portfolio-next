@@ -5,8 +5,10 @@ import { UserRound, Layout, Database, Terminal } from "lucide-react";
 import { profile } from "@/data/profile";
 import { statistics } from "@/data/experience";
 import { GridPattern } from "@/components/ui/grid-pattern";
+import { useIsMobile } from "@/hooks/use-is-mobile";
 
 export const AboutSection = () => {
+  const isMobile = useIsMobile();
   return (
     <section
       id="about"
@@ -36,6 +38,7 @@ export const AboutSection = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: isMobile }}
             className="flex items-center gap-2 mb-4 text-yellow-600 font-bold uppercase tracking-widest text-xs"
           >
             <UserRound size={16} />
@@ -45,6 +48,7 @@ export const AboutSection = () => {
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: isMobile }}
             transition={{ delay: 0.2 }}
             className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-foreground mb-6"
           >
@@ -54,6 +58,7 @@ export const AboutSection = () => {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: isMobile }}
             transition={{ delay: 0.3 }}
             className="text-lg md:text-xl text-muted-foreground leading-relaxed"
           >
@@ -69,6 +74,7 @@ export const AboutSection = () => {
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: isMobile }}
             className="col-span-1 md:col-span-8 glass p-6 md:p-8 rounded-3xl shadow-xl flex flex-col gap-6"
           >
             <h3 className="text-3xl font-serif font-bold text-foreground">
@@ -86,6 +92,7 @@ export const AboutSection = () => {
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: isMobile }}
             className="col-span-1 md:col-span-4 glass p-8 rounded-3xl shadow-xl flex flex-col items-center justify-center gap-8 relative overflow-hidden group"
           >
             {statistics.slice(0, 2).map((stat, idx) => (
@@ -104,6 +111,7 @@ export const AboutSection = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: isMobile }}
             className="col-span-1 md:col-span-4 glass p-6 md:p-8 rounded-3xl shadow-xl flex flex-col gap-4 items-center text-center"
           >
             <div className="p-4 bg-yellow-600/10 rounded-2xl text-yellow-600">
@@ -119,6 +127,7 @@ export const AboutSection = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: isMobile }}
             transition={{ delay: 0.1 }}
             className="col-span-1 md:col-span-4 glass p-6 md:p-8 rounded-3xl shadow-xl flex flex-col gap-4 items-center text-center"
           >
@@ -135,6 +144,7 @@ export const AboutSection = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: isMobile }}
             transition={{ delay: 0.2 }}
             className="col-span-1 md:col-span-4 glass p-6 md:p-8 rounded-3xl shadow-xl flex flex-col gap-4 items-center text-center"
           >
