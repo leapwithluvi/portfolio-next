@@ -11,12 +11,12 @@ export const ExperienceSection = () => {
   return (
     <section
       id="experience"
-      className="relative py-20 md:py-32 overflow-hidden bg-background"
+      className="relative py-16 md:py-32 overflow-hidden bg-background"
     >
       <div className="max-container">
         <div className="flex flex-col gap-12 mb-10 md:mb-20">
           <div className="text-label text-accent">{t.experience.badge}</div>
-          <h2 className="text-6xl md:text-8xl font-serif font-bold text-foreground leading-[0.8] tracking-tighter">
+          <h2 className="text-4xl md:text-6xl font-serif font-bold text-foreground leading-[1.1] tracking-tighter">
             {t.experience.title}
           </h2>
         </div>

@@ -11,10 +11,12 @@ export const GithubSection = () => {
     yearJoined: 0,
     contributions: 0,
   });
+  const [mounted, setMounted] = useState(false);
   
   const username = "leapwithluvi";
 
   useEffect(() => {
+    setMounted(true);
     async function fetchStats() {
       try {
         const userRes = await fetch(`https://api.github.com/users/${username}`);
@@ -49,7 +51,7 @@ export const GithubSection = () => {
   }, []);
 
   return (
-    <section id="github" className="relative py-24 md:py-36 overflow-hidden bg-background border-y border-border">
+    <section id="github" className="relative py-16 md:py-32 overflow-hidden bg-background border-y border-border">
       <div className="max-container flex flex-col">
         {/* Header Section */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-10 mb-16 px-2">
@@ -57,7 +59,7 @@ export const GithubSection = () => {
             <div className="text-[10px] font-bold uppercase tracking-[0.3em] text-muted-foreground flex items-center gap-2">
               <span className="text-accent">✦</span> GARDEN / PUBLIC RHYTHM
             </div>
-            <h2 className="text-6xl md:text-8xl font-serif font-bold text-foreground leading-[0.9] tracking-tighter">
+            <h2 className="text-4xl md:text-6xl font-serif font-bold text-foreground leading-[1.1] tracking-tighter">
               Public proof of <br /> steady execution.
             </h2>
           </div>
@@ -129,16 +131,18 @@ export const GithubSection = () => {
 
              <div className="w-full flex justify-end overflow-x-auto pb-6 scrollbar-hide">
                 <div className="shrink-0">
-                  <GitHubCalendar
-                    username={username}
-                    theme={{
-                      light: ["#E2EAF0", "#A8D8EA", "#7EC8E3", "#4FA3C7", "#0D1B26"],
-                      dark: ["#1A3A4A", "#2A5068", "#4FA3C7", "#7EC8E3", "#E8F4FF"],
-                    }}
-                    blockSize={10}
-                    blockMargin={3}
-                    fontSize={10}
-                  />
+                  {mounted && (
+                    <GitHubCalendar
+                      username={username}
+                      theme={{
+                        light: ["#E2EAF0", "#A8D8EA", "#7EC8E3", "#4FA3C7", "#3A5568"],
+                        dark: ["#1A3A4A", "#2A5068", "#4FA3C7", "#7EC8E3", "#E8F4FF"],
+                      }}
+                      blockSize={10}
+                      blockMargin={3}
+                      fontSize={10}
+                    />
+                  )}
                 </div>
              </div>
 

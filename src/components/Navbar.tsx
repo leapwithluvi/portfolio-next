@@ -1,7 +1,7 @@
 "use client"
  
 import { useState, useEffect } from "react";
-import { Moon, Sun, Menu, X, ChevronRight, Search } from "lucide-react";
+import { Moon, Sun, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { profile } from "@/data/profile";
 import { navLinks } from "@/data/navigation";
@@ -37,8 +37,8 @@ export const Navbar: React.FC = () => {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 border-b ${
-          isScrolled ? "bg-background/80 backdrop-blur-md border-border py-4" : "bg-transparent border-transparent py-8"
+        className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 border-b will-change-transform ${
+          isScrolled ? "bg-background/80 backdrop-blur-sm border-border py-4" : "bg-transparent border-transparent py-8"
         }`}
       >
         <div className="max-container flex justify-between items-center">
@@ -144,7 +144,7 @@ export const Navbar: React.FC = () => {
                   transition={{ delay: 0.3 }}
                   className="text-[10px] items-start flex text-left font-bold uppercase tracking-widest text-accent mb-2"
                 >
-                  {t.nav.about} {/* Using About as a proxy for navigation or add a specific key */}
+                  {t.nav.about}
                 </motion.span>
                 <div className="flex flex-col gap-2 sm:gap-4">
                   {navLinks.map((link, idx) => (

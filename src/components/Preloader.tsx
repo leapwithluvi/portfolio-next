@@ -7,179 +7,92 @@ import { profile } from "@/data/profile";
 
 export default function Preloader() {
   const pathname = usePathname();
-  const [index, setIndex] = useState(0);
-  const [dimension, setDimension] = useState({ width: 0, height: 0 });
   const [isLoading, setIsLoading] = useState(true);
-
-  // If not on home page, we won't render the content, but we must call hooks
+  const [count, setCount] = useState(0);
   const isHomePage = pathname === "/";
 
-  const [count, setCount] = useState(0);
-
-  const words = profile.greetings;
- 
   useEffect(() => {
-    setDimension({ width: window.innerWidth, height: window.innerHeight });
-  }, []);
- 
-  useEffect(() => {
-    const preventDefault = (e: Event) => e.preventDefault();
-    
-    if (isLoading) {
-      document.body.style.overflow = "hidden";
-      // Block wheel and touch scroll
-      window.addEventListener("wheel", preventDefault, { passive: false });
-      window.addEventListener("touchmove", preventDefault, { passive: false });
-    } else {
-      document.body.style.overflow = "auto";
-      window.removeEventListener("wheel", preventDefault);
-      window.removeEventListener("touchmove", preventDefault);
-    }
-    
-    return () => {
-      document.body.style.overflow = "auto";
-      window.removeEventListener("wheel", preventDefault);
-      window.removeEventListener("touchmove", preventDefault);
-    };
-  }, [isLoading]);
- 
-  useEffect(() => {
-    // Calculate target percentage based on current word index
-    const targetCount = Math.floor(((index + 1) / words.length) * 100);
-    
-    // Smoothly animate the counter to reach the target percentage
-    const interval = setInterval(() => {
-      setCount((prev) => {
-        if (prev < targetCount) return prev + 1;
-        clearInterval(interval);
-        return prev;
-      });
-    }, 15); // Slightly slower increment: 15ms per 1%
- 
-    // Logic for switching words
-    if (index === words.length - 1) {
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 500); // Wait 500ms at the last word
+    if (!isHomePage) {
+      setIsLoading(false);
       return;
     }
-    
-    const wordsTimer = setTimeout(() => {
-      setIndex(index + 1);
-    }, index === 0 ? 500 : 150); // 500ms first word, 150ms others
 
-    return () => {
-      clearTimeout(wordsTimer);
-      clearInterval(interval);
+    // Fast counter animation (0 to 100 in ~800ms)
+    const startTime = Date.now();
+    const duration = 800;
+
+    const updateCounter = () => {
+      const now = Date.now();
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      
+      setCount(Math.floor(progress * 100));
+
+      if (progress < 1) {
+        requestAnimationFrame(updateCounter);
+      } else {
+        setTimeout(() => setIsLoading(false), 200);
+      }
     };
-  }, [index, words.length]);
+
+    requestAnimationFrame(updateCounter);
+
+    // Lock scroll
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [isHomePage]);
 
   // Dispatch event when loading is complete
   useEffect(() => {
     if (!isLoading) {
-      // Small delay to ensure the exit animation is nearly finished
-      const timer = setTimeout(() => {
-        window.dispatchEvent(new Event("loader-finished"));
-      }, 800);
-      return () => clearTimeout(timer);
+      window.dispatchEvent(new Event("loader-finished"));
     }
   }, [isLoading]);
 
-  // Path for the elastic "tail" curve below the DIV
-  const initialPath = `M0 0 L${dimension.width} 0 Q${dimension.width / 2} 200 0 0 Z`;
-  const targetPath = `M0 0 L${dimension.width} 0 Q${dimension.width / 2} 0 0 0 Z`;
-
-  const getLayerVariants = (transitionDelay: number) => ({
-    initial: { y: 0 },
-    exit: { 
-      y: "-100vh",
-      transition: { duration: 0.3, ease: [0.76, 0, 0.24, 1] as [number, number, number, number], delay: transitionDelay } 
-    },
-  });
-
-  const getCurveVariants = (transitionDelay: number) => ({
-    initial: {
-      d: initialPath,
-      transition: { duration: 0.2, ease: [0.76, 0, 0.24, 1] as [number, number, number, number] },
-    },
-    exit: {
-      d: targetPath,
-      transition: { duration: 0.2, ease: [0.76, 0, 0.24, 1] as [number, number, number, number], delay: transitionDelay },
-    },
-  });
-
   return (
-    <AnimatePresence mode="wait">
+    <AnimatePresence>
       {isHomePage && isLoading && (
-        <div className="fixed inset-0 z-[9999] pointer-events-none">
-          {/* Layer 1: Gray Background Shade - Desktop Only */}
-          <motion.div
-            variants={getLayerVariants(0.2)}
-            initial="initial"
-            exit="exit"
-            className="absolute inset-0 z-10 bg-background-secondary hidden md:block transform-gpu"
-          >
-            <svg className="absolute top-[99.5%] w-full h-[200px] fill-background-secondary">
-              <motion.path
-                variants={getCurveVariants(0.2)}
-                initial="initial"
-                exit="exit"
+        <motion.div
+          key="preloader"
+          initial={{ opacity: 1 }}
+          exit={{ 
+            y: "-100%",
+            transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] } 
+          }}
+          className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-background"
+        >
+          <div className="relative flex flex-col items-center gap-4">
+            {/* Minimalist Logo / Name */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-xs font-mono tracking-[0.5em] text-accent uppercase"
+            >
+              {profile.name.replace(/\s+/g, '_')}
+            </motion.div>
+            
+            {/* The Percentage - Big but clean */}
+            <div className="text-7xl md:text-9xl font-serif font-bold text-foreground tracking-tighter tabular-nums">
+              {count.toString().padStart(3, '0')}
+            </div>
+
+            {/* Progress Bar Detail */}
+            <div className="w-48 h-px bg-border relative overflow-hidden">
+              <motion.div 
+                className="absolute inset-0 bg-accent origin-left"
+                style={{ scaleX: count / 100 }}
               />
-            </svg>
-          </motion.div>
-          
-          {/* Layer 2: Yellow Accent Shade - Desktop Only */}
-          <motion.div
-            variants={getLayerVariants(0.1)}
-            initial="initial"
-            exit="exit"
-            className="absolute inset-0 z-20 bg-accent hidden md:block transform-gpu"
-          >
-            <svg className="absolute top-[99.5%] w-full h-[200px] fill-accent">
-              <motion.path
-                variants={getCurveVariants(0.1)}
-                initial="initial"
-                exit="exit"
-              />
-            </svg>
-          </motion.div>
+            </div>
+          </div>
 
-          {/* Layer 3: Main Black Layer */}
-          <motion.div
-            key="loader"
-            variants={getLayerVariants(0)}
-            initial="initial"
-            exit="exit"
-            className="absolute inset-0 z-30 flex items-center justify-center bg-background pointer-events-auto shadow-[0_50px_100px_rgba(0,0,0,0.5)] transform-gpu"
-          >
-            {dimension.width > 0 && (
-              <>
-                <motion.p
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.2 }}
-                  className="flex items-center gap-3 text-foreground text-4xl md:text-6xl font-serif z-10"
-                >
-                  <span className="block w-2 h-2 rounded-full bg-accent animate-pulse" />
-                  {words[index]}
-                </motion.p>
-
-                {/* Counting Percentage - Now synced with words */}
-                <div className="absolute bottom-10 right-10 text-foreground/20 text-[12vw] font-bold font-serif leading-none select-none tracking-tighter">
-                  {count}%
-                </div>
-
-                <svg className="absolute top-[99.5%] w-full h-[200px] fill-background">
-                  <motion.path
-                    variants={getCurveVariants(0)}
-                    initial="initial"
-                    exit="exit"
-                  />
-                </svg>
-              </>
-            )}
-          </motion.div>
-        </div>
+          {/* Bottom Technical Label */}
+          <div className="absolute bottom-10 flex flex-col items-center gap-2">
+            <span className="text-[10px] font-mono opacity-20 uppercase tracking-widest">Initialization_Sequence</span>
+            <div className="w-1 h-1 bg-accent rounded-full animate-ping" />
+          </div>
+        </motion.div>
       )}
     </AnimatePresence>
   );

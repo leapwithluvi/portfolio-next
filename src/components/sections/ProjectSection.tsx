@@ -8,12 +8,12 @@ import { useTranslation } from "@/hooks/useTranslation";
 export const ProjectSection: React.FC = () => {
   const { t } = useTranslation();
   return (
-    <section id="work" className="relative py-20 md:py-32 overflow-hidden bg-background">
+    <section id="work" className="relative py-16 md:py-32 overflow-hidden bg-background">
       <div className="max-container">
         <div className="flex flex-col lg:flex-row justify-between items-end gap-12 mb-16 md:mb-24">
           <div className="flex flex-col gap-10 max-w-4xl">
             <div className="text-label text-accent">{t.projects.badge}</div>
-            <h2 className="text-6xl md:text-8xl font-serif font-bold text-foreground leading-[0.8] tracking-tighter">
+            <h2 className="text-4xl md:text-6xl font-serif font-bold text-foreground leading-[1.1] tracking-tighter">
               {t.projects.title}
             </h2>
             <p className="text-xl md:text-2xl text-muted-foreground font-light leading-relaxed">
@@ -140,7 +140,7 @@ export const ProjectSection: React.FC = () => {
 
         {/* Footer CTA */}
         <div className="mt-24 md:mt-48 pt-16 md:pt-32 border-t border-border flex flex-col md:flex-row justify-between items-center gap-16">
-          <div className="text-4xl md:text-6xl font-serif font-bold max-w-2xl text-center md:text-left leading-none tracking-tighter">
+          <div className="text-3xl md:text-5xl font-serif font-bold max-w-2xl text-center md:text-left leading-none tracking-tighter">
             {t.projects.footerTitle}
           </div>
           <div className="flex flex-col items-center md:items-start gap-8 max-w-sm">
