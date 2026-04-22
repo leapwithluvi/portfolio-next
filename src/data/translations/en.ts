@@ -35,7 +35,7 @@ export const en = {
   about: {
     badge: "Know Me Better",
     title: "Behind the Code",
-    description: "Specialized in building full-scale web solutions using modern frameworks and performance-driven architectures. A Software Engineering student from Kutai Kalkutanegara committed to professional-grade development.",
+    description: "Specialized in building full-scale web solutions using modern frameworks and performance-driven architectures. A Software Engineering student from Kutai Kartanegara committed to professional-grade development.",
     phase1: "Phases / 01",
     phase1Title: "Discovery & Architecture",
     phase1Desc: "I am a dedicated Software Engineering student at SMK Negeri 1 Tenggarong, Kutai Kartanegara, Borneo. My journey in the world of programming started with a deep curiosity about digital systems, which eventually led me to specialize in high-performance web development. As a leading student in my vocational high school, I focus on bridging the gap between academic learning and real-world industry standards.",
@@ -81,12 +81,18 @@ export const en = {
   experience: {
     badge: "Career Journey",
     title: "Work & Experience",
-    description: "A documented trail of my professional evolution, focusing on building high-performance systems and exploring the boundaries of AI integration in modern web architectures."
+    description: "A documented trail of my professional evolution, focusing on building high-performance systems and exploring the boundaries of AI integration in modern web architectures.",
+    rivolta: {
+      detail1: "Enterprise CMS Development: Building backend architecture using Node.js, Express.js, and Prisma ORM. Implementing RBAC systems for user access management and ensuring data integrity for dynamic content assets.",
+      detail2: "SaaS Platform Development: Responsible for developing end-to-end features (frontend & backend) using React.js and Express.js, ensuring responsive and scalable application performance.",
+      detail3: "API Integration: Designing and integrating secure RESTful APIs with JWT authentication systems.",
+      summary: "Gained hands-on experience in full-stack development, strengthening skills in modern web to deliver high-quality software solutions."
+    }
   },
   certificates: {
     badge: "Verifiable Skills",
     title: "Certifications",
-    description: "A collection of my validated expertise from global industry leaders, spanning across Cloud Computing, AI, and Fullstack Engineering."
+    description: "A collection of my validated expertise from global industry leaders, spanning across Machine Learning, AI, and Fullstack Engineering."
   },
   contact: {
     badge: "Reach Out",
@@ -95,5 +101,21 @@ export const en = {
     resume: "Download_CV",
     establish: "Establish Contact",
     getInTouch: "Get In Touch"
+  },
+  github: {
+    title: "Public proof of steady execution.",
+    description: "Repository activity is not the whole story, but it helps show consistency, iteration, and how often I ship technical work.",
+    repos: "Repos",
+    publicRepos: "Public Repos",
+    follow: "Follow",
+    followers: "Followers",
+    total: "Total",
+    contributions: "Contributions",
+    since: "Since",
+    yearJoined: "Year Joined",
+    contributionMap: "Contribution Map",
+    last12Months: "Last 12 months",
+    less: "Less",
+    more: "More"
   }
 };

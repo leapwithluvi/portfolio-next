@@ -81,12 +81,18 @@ export const id = {
   experience: {
     badge: "Perjalanan Karir",
     title: "Kerja & Pengalaman",
-    description: "Jejak terdokumentasi dari evolusi profesional saya, berfokus pada pembangunan sistem performa tinggi dan eksplorasi batas integrasi AI."
+    description: "Jejak terdokumentasi dari evolusi profesional saya, berfokus pada pembangunan sistem performa tinggi dan eksplorasi batas integrasi AI.",
+    rivolta: {
+      detail1: "Enterprise CMS Development: Membangun arsitektur backend menggunakan Node.js, Express.js, dan Prisma ORM. Mengimplementasikan sistem RBAC untuk manajemen akses pengguna dan memastikan integritas data pada aset konten dinamis.",
+      detail2: "SaaS Platform Development: Bertanggung jawab mengembangkan fitur end-to-end (frontend & backend) menggunakan React.js dan Express.js, memastikan performa aplikasi yang responsif dan skalabel.",
+      detail3: "API Integration: Merancang dan mengintegrasikan RESTful API yang aman dengan sistem autentikasi JWT.",
+      summary: "Memperoleh pengalaman langsung dalam pengembangan full-stack, memperkuat keterampilan dalam web modern untuk menghasilkan solusi perangkat lunak berkualitas tinggi."
+    }
   },
   certificates: {
     badge: "Keahlian Terverifikasi",
     title: "Sertifikasi",
-    description: "Kumpulan keahlian saya yang divalidasi oleh pemimpin industri global, mencakup Cloud Computing, AI, dan Fullstack Engineering."
+    description: "Kumpulan keahlian saya yang divalidasi oleh pemimpin industri global, mencakup Machine Learning, AI, dan Fullstack Engineering."
   },
   contact: {
     badge: "Hubungi Saya",
@@ -95,5 +101,21 @@ export const id = {
     resume: "Unduh_CV",
     establish: "Jalin Hubungan",
     getInTouch: "Hubungi Saya"
+  },
+  github: {
+    title: "Bukti publik dari eksekusi yang stabil.",
+    description: "Aktivitas repositori bukan segalanya, namun membantu menunjukkan konsistensi, iterasi, dan seberapa sering saya merilis pekerjaan teknis.",
+    repos: "Repos",
+    publicRepos: "Repositori Publik",
+    follow: "Ikuti",
+    followers: "Pengikut",
+    total: "Total",
+    contributions: "Kontribusi",
+    since: "Sejak",
+    yearJoined: "Tahun Bergabung",
+    contributionMap: "Peta Kontribusi",
+    last12Months: "12 bulan terakhir",
+    less: "Kurang",
+    more: "Lebih"
   }
 };

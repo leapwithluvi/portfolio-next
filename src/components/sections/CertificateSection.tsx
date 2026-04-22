@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { ExternalLink} from "lucide-react";
 import { certificates } from "@/data/certificates";
 import { useTranslation } from "@/hooks/useTranslation";
+import Image from "next/image";
  
 const categories = ["All", ...Array.from(new Set(certificates.map((c) => c.category)))];
 
@@ -45,7 +46,7 @@ export const CertificateSection = () => {
                     {activeCategory === category && (
                         <motion.div 
                             layoutId="activeTab"
-                            className="absolute -bottom-[33px] left-0 right-0 h-0.5 bg-accent z-10"
+                            className="absolute -bottom-8.25 left-0 right-0 h-0.5 bg-accent z-10"
                         />
                     )}
                 </button>
@@ -65,11 +66,13 @@ export const CertificateSection = () => {
                 className="group grid grid-cols-1 lg:grid-cols-12 gap-8 py-10 md:py-16 border-b border-border items-center hover:bg-muted/30 transition-colors duration-500"
               >
                 <div className="lg:col-span-1 text-meta opacity-30 group-hover:opacity-100 uppercase">
-                  {index < 9 ? `0${index + 1}` : index + 1}
+                   {index < 9 ? `0${index + 1}` : index + 1}
                 </div>
                 
                 <div className="lg:col-span-1 flex justify-center">
-                   <img src={cert.issuerLogo} alt={cert.issuer} className="w-10 h-10 object-contain grayscale group-hover:grayscale-0 transition-all opacity-50 group-hover:opacity-100" />
+                   <div className="relative w-10 h-10 grayscale group-hover:grayscale-0 transition-all opacity-50 group-hover:opacity-100">
+                     <Image src={cert.issuerLogo} alt={cert.issuer} fill className="object-contain" />
+                   </div>
                 </div>
 
                 <div className="lg:col-span-4 flex flex-col gap-2">
@@ -106,4 +109,3 @@ export const CertificateSection = () => {
     </section>
   );
 };
-

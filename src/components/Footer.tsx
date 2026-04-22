@@ -32,7 +32,7 @@ export const Footer = () => {
                {navLinks.map((link) => (
                  <li key={link.name}>
                    <a href={link.href} className="text-label hover:text-accent transition-colors uppercase text-[10px] tracking-widest">
-                     {(t.nav as any)[link.name.toLowerCase()]}
+                     {(t.nav as Record<string, string>)[link.name.toLowerCase()]}
                    </a>
                  </li>
                ))}
@@ -90,4 +90,3 @@ export const Footer = () => {
     </footer>
   );
 };
-

@@ -9,15 +9,15 @@ import {
   Briefcase, 
   Award, 
   Mail, 
-  Command, 
   X,
   Keyboard,
   Code,
-  History
+  History,
+  LucideIcon
 } from "lucide-react";
 import { navLinks } from "@/data/navigation";
 
-const IconMap: Record<string, any> = {
+const IconMap: Record<string, LucideIcon> = {
   Home,
   User,
   Briefcase,
@@ -56,11 +56,13 @@ export default function CommandPalette() {
 
   const handleAction = (href: string) => {
     setIsOpen(false);
-    // Strip leading slash if present (e.g., /#about -> #about)
-    const targetId = href.startsWith("/") ? href.slice(1) : href;
-    const element = document.querySelector(targetId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+    const targetId = href.includes("#") ? href.split("#")[1] : "";
+    if (targetId) {
+      const element = document.getElementById(targetId);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+        window.history.pushState(null, "", `#${targetId}`);
+      }
     }
   };
 
@@ -70,15 +72,14 @@ export default function CommandPalette() {
 
   return (
     <>
-      {/* Keyboard Shortcut Indicator (Hidden on Mobile) */}
-      <div className="fixed bottom-8 left-8 z-[60] hidden lg:flex items-center gap-3 px-4 py-2 bg-background border border-border text-[9px] font-bold text-foreground uppercase tracking-[0.2em] shadow-2xl">
+      <div className="fixed bottom-8 left-8 z-60 hidden lg:flex items-center gap-3 px-4 py-2 bg-background border border-border text-[9px] font-bold text-foreground uppercase tracking-[0.2em] shadow-2xl">
         <Keyboard size={12} className="text-accent" />
         Press <span className="px-1.5 py-0.5 border border-border text-foreground">CTRL</span> <span className="px-1.5 py-0.5 border border-border text-foreground">K</span> to interact
       </div>
 
       <AnimatePresence>
         {isOpen && (
-          <div className="fixed inset-0 z-[200] flex items-start justify-center pt-[15vh] px-4">
+          <div className="fixed inset-0 z-200 flex items-start justify-center pt-[15vh] px-4">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -93,7 +94,6 @@ export default function CommandPalette() {
               exit={{ opacity: 0, scale: 0.98, y: -10 }}
               className="relative w-full max-w-2xl bg-background border border-border shadow-2xl rounded-none overflow-hidden"
             >
-              {/* Search Bar */}
               <div className="flex items-center px-6 py-5 border-b border-border">
                 <Search className="text-accent mr-4" size={18} />
                 <input
@@ -111,7 +111,6 @@ export default function CommandPalette() {
                 </button>
               </div>
 
-              {/* Actions List */}
               <div className="max-h-[60vh] overflow-y-auto p-2 bg-muted/5">
                 {filteredActions.length > 0 ? (
                   filteredActions.map((action, idx) => {
@@ -124,6 +123,9 @@ export default function CommandPalette() {
                       >
                         <div className="flex items-center gap-4">
                           <div className="text-meta opacity-20 group-hover:opacity-100 transition-opacity">0{idx + 1}</div>
+                          <div className="p-2 bg-muted/50 border border-border group-hover:border-accent group-hover:text-accent transition-colors">
+                            <Icon size={14} />
+                          </div>
                           <div className="flex flex-col">
                              <span className="text-label text-[11px] group-hover:text-accent transition-colors">{action.name}</span>
                              <span className="text-[9px] uppercase tracking-widest opacity-30 font-mono">system.nav.{action.name.toLowerCase()}</span>
@@ -145,7 +147,6 @@ export default function CommandPalette() {
                 )}
               </div>
 
-              {/* Footer */}
               <div className="px-6 py-4 bg-muted/20 border-t border-border flex items-center justify-between text-[8px] font-bold text-foreground/40 uppercase tracking-[0.3em]">
                 <div className="flex items-center gap-6">
                   <span className="flex items-center gap-2">

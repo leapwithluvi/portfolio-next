@@ -171,8 +171,8 @@ export default function RootLayout({
         <LanguageProvider>
           <div className="relative flex min-h-screen flex-col">
             {/* Global Vertical Dividers - Simplified for performance */}
-            <div className="absolute left-[calc(50%-600px)] top-0 bottom-0 w-[1px] bg-border/20 hidden xl:block pointer-events-none z-0" />
-            <div className="absolute right-[calc(50%-600px)] top-0 bottom-0 w-[1px] bg-border/20 hidden xl:block pointer-events-none z-0" />
+            <div className="absolute left-[calc(50%-600px)] top-0 bottom-0 w-px bg-border/20 hidden xl:block pointer-events-none z-0" />
+            <div className="absolute right-[calc(50%-600px)] top-0 bottom-0 w-px bg-border/20 hidden xl:block pointer-events-none z-0" />
 
             <SmoothScroll>
               <Preloader />

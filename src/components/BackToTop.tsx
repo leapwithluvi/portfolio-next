@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { motion, AnimatePresence, useScroll, useSpring, useTransform } from "motion/react";
+import { motion, AnimatePresence, useScroll, useSpring } from "motion/react";
 import { ArrowUp } from "lucide-react";
 
 export default function BackToTop() {
@@ -37,7 +37,7 @@ export default function BackToTop() {
           initial={{ opacity: 0, scale: 0.5, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.5, y: 20 }}
-          className="fixed bottom-8 right-8 z-[60] cursor-pointer group"
+          className="fixed bottom-8 right-8 z-60 cursor-pointer group"
           onClick={scrollToTop}
         >
           {/* Circular Progress SVG */}

@@ -16,10 +16,18 @@ export const Navbar: React.FC = () => {
   const [isDark, setIsDark] = useState<boolean>(false);
  
   useEffect(() => {
-    setIsDark(document.documentElement.classList.contains("dark"));
+    // Check theme on mount
+    const frame = requestAnimationFrame(() => {
+      const isDarkTheme = document.documentElement.classList.contains("dark");
+      setIsDark(isDarkTheme);
+    });
+
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
  
   const toggleTheme = () => {
@@ -37,14 +45,14 @@ export const Navbar: React.FC = () => {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 border-b will-change-transform ${
+        className={`fixed top-0 left-0 right-0 z-100 transition-all duration-500 border-b will-change-transform ${
           isScrolled ? "bg-background/80 backdrop-blur-sm border-border py-4" : "bg-transparent border-transparent py-8"
         }`}
       >
         <div className="max-container flex justify-between items-center">
           {/* Logo */}
           <a href="#home" className="flex items-center gap-2 group">
-            <span className="text-sm font-bold uppercase tracking-[0.1em] text-foreground">
+            <span className="text-sm font-bold uppercase tracking-widest text-foreground">
               {profile.logoName}
             </span>
             <div className="w-1.5 h-1.5 bg-accent rounded-full group-hover:animate-ping" />
@@ -58,7 +66,7 @@ export const Navbar: React.FC = () => {
                 href={link.href}
                 className="text-label text-[9px] text-muted-foreground hover:text-accent transition-colors relative group"
               >
-                {(t.nav as any)[link.name.toLowerCase()]}
+                {(t.nav as Record<string, string>)[link.name.toLowerCase()]}
                 <span className="absolute -bottom-1 left-0 w-0 h-px bg-accent transition-all duration-300 group-hover:w-full" />
               </a>
             ))}
@@ -112,12 +120,12 @@ export const Navbar: React.FC = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4 }}
-            className="fixed inset-0 bg-background z-[150] flex flex-col p-6 sm:p-10 lg:hidden overflow-y-auto"
+            className="fixed inset-0 bg-background z-150 flex flex-col p-6 sm:p-10 lg:hidden overflow-y-auto"
           >
             {/* Mobile Menu Header - PERSISTENT */}
             <div className="flex justify-between items-center mb-8 shrink-0">
               <div className="flex items-center gap-2">
-                <span className="text-sm font-bold uppercase tracking-[0.1em] text-foreground">
+                <span className="text-sm font-bold uppercase tracking-widest text-foreground">
                   {profile.logoName}
                 </span>
                 <div className="w-1.5 h-1.5 bg-accent rounded-full" />
@@ -135,9 +143,9 @@ export const Navbar: React.FC = () => {
               initial={{ y: -50, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="flex flex-col flex-grow"
+              className="flex flex-col grow"
             >
-              <div className="flex flex-col gap-3 sm:gap-6 mb-12 flex-grow">
+              <div className="flex flex-col gap-3 sm:gap-6 mb-12 grow">
                 <motion.span 
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 0.5, x: 0 }}
@@ -163,7 +171,7 @@ export const Navbar: React.FC = () => {
                         onClick={() => setIsMobileMenuOpen(false)}
                         className="text-2xl sm:text-4xl md:text-5xl font-serif font-bold text-foreground border-b border-border pb-3 hover:text-accent transition-colors text-left block"
                       >
-                        {(t.nav as any)[link.name.toLowerCase()]}
+                        {(t.nav as Record<string, string>)[link.name.toLowerCase()]}
                       </a>
                     </motion.div>
                   ))}

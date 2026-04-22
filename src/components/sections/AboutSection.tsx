@@ -26,7 +26,7 @@ export const AboutSection = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            <div className="relative aspect-[4/5] w-full max-w-[480px] mx-auto border border-border p-3 bg-muted/5 group">
+            <div className="relative aspect-4/5 w-full max-w-120 mx-auto border border-border p-3 bg-muted/5 group">
               <div className="relative w-full h-full overflow-hidden bg-muted">
                 <Image 
                   src={profile.image} 

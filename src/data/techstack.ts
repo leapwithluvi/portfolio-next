@@ -169,7 +169,7 @@ export const techStack: TechStack[] = [
     name: "Railway",
     category: "devops",
     type: "Cloud Platform",
-    logo: "https://cdn.simpleicons.org/railway",
+    logo: "https://railway.com/brand/logo-dark.svg",
     url: "https://railway.app/",
   },
 
@@ -266,17 +266,10 @@ export const techStack: TechStack[] = [
     url: "https://www.kaggle.com/",
   },
   {
-    name: "Hugging Face",
-    category: "ai_ml",
-    type: "AI/ML Platform",
-    logo: "https://cdn.simpleicons.org/huggingface",
-    url: "https://huggingface.co/",
-  },
-  {
     name: "Ollama",
     category: "ai_ml",
     type: "Local LLM Framework",
-    logo: "https://cdn.simpleicons.org/ollama",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/ollama/ollama-original.svg",
     url: "https://ollama.com/",
   },
 ];

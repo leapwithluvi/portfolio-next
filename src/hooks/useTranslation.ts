@@ -4,9 +4,11 @@ import { useLanguage } from "@/context/LanguageContext";
 import { en } from "@/data/translations/en";
 import { id } from "@/data/translations/id";
 
+export type TranslationType = typeof en;
+
 export const useTranslation = () => {
   const { lang } = useLanguage();
-  const t = lang === "en" ? en : id;
+  const t: TranslationType = lang === "en" ? en : id;
   
   return { t, lang };
 };

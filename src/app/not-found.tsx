@@ -13,7 +13,7 @@ export default function NotFound() {
       {/* Background Subtle Gradient */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
         <div 
-          className="max-w-[1280px] mx-auto h-full relative"
+          className="max-w-7xl mx-auto h-full relative"
           style={{
             maskImage: 'radial-gradient(circle at center, black 0%, transparent 80%)',
             WebkitMaskImage: 'radial-gradient(circle at center, black 0%, transparent 80%)',
@@ -73,7 +73,7 @@ export default function NotFound() {
       </div>
 
       {/* Decorative Blur */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-accent/5 blur-[120px] rounded-full pointer-events-none -z-10" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-125 h-125 bg-accent/5 blur-[120px] rounded-full pointer-events-none -z-10" />
     </div>
   )
 }
