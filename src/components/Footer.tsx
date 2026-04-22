@@ -76,7 +76,7 @@ export const Footer = () => {
                 </li>
                 <li className="flex flex-col gap-1 md:gap-2">
                   <span className="text-xs md:text-base font-bold font-serif">{t.footer.discipline2}</span>
-                  <span className="text-[8px] md:text-[10px] uppercase text-muted-foreground tracking-widest leading-relaxed font-medium">PostgreSQL, Prisma, MongoDB</span>
+                  <span className="text-[8px] md:text-[10px] uppercase text-muted-foreground tracking-widest leading-relaxed font-medium">Scikit-learn, TensorFlow, PyTorch</span>
                 </li>
              </ul>
           </div>
