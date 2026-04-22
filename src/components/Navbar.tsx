@@ -31,6 +31,21 @@ export const Navbar: React.FC = () => {
   }, []);
  
   const toggleTheme = () => {
+    // Optimization: Disable transitions temporarily to prevent lag
+    const css = document.createElement('style');
+    css.appendChild(
+      document.createTextNode(
+        `* {
+           -webkit-transition: none !important;
+           -moz-transition: none !important;
+           -o-transition: none !important;
+           -ms-transition: none !important;
+           transition: none !important;
+        }`
+      )
+    );
+    document.head.appendChild(css);
+
     const nextDark = !isDark;
     setIsDark(nextDark);
     if (nextDark) {
@@ -40,6 +55,11 @@ export const Navbar: React.FC = () => {
       document.documentElement.classList.remove("dark");
       localStorage.setItem("theme", "light");
     }
+
+    // Force a reflow
+    window.getComputedStyle(css).opacity;
+    // Remove the style tag to re-enable transitions
+    document.head.removeChild(css);
   };
  
   return (
