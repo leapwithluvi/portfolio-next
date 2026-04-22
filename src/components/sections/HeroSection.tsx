@@ -4,30 +4,32 @@ import { motion } from "motion/react";
 import { profile } from "@/data/profile";
 import { ArrowDownRight} from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
+import Image from "next/image";
  
 export const HeroSection = () => {
   const { t } = useTranslation();
   return (
-    <section
-      id="home"
-      className="sticky top-0 h-screen flex flex-col justify-center items-center overflow-hidden bg-background z-0 pt-20 md:pt-32 pb-10 md:pb-20"
-    >
-      {/* Video Background */}
+    <>
+      {/* Target navigasi tetap di paling atas halaman */}
+      <div id="home" className="absolute top-0 left-0 w-px h-px pointer-events-none" />
+      
+      <section
+        className="sticky top-0 h-screen flex flex-col justify-center items-center overflow-hidden bg-background z-0 pt-20 md:pt-32 pb-10 md:pb-20"
+      >
+      {/* Background Background */}
       <div className="absolute inset-0 z-0">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="metadata"
-          className="w-full h-full object-cover opacity-10 dark:opacity-30"
-        >
-          <source src="https://player.vimeo.com/external/370331493.sd.mp4?s=33d548f0e0f80dfa8397a73a388b64e0a7192666&profile_id=139&oauth2_token_id=57447761" type="video/mp4" />
-        </video>
+        <Image 
+          src="https://giffiles.alphacoders.com/211/211056.gif"
+          alt="Background"
+          fill
+          unoptimized
+          className="object-cover opacity-80 dark:opacity-80"
+          priority
+        />
         <div className="absolute inset-0 bg-linear-to-b from-background via-transparent to-background" />
       </div>
 
-      <div className="max-container relative z-10 flex flex-col items-center text-center gap-6 md:gap-8 px-6">
+      <div className="relative z-10 w-full max-w-[100vw] flex flex-col items-center text-center gap-6 md:gap-8 px-4 md:px-6">
         {/* Status Badge */}
         <motion.div
           initial={{ opacity: 0, y: -10 }}
@@ -40,10 +42,10 @@ export const HeroSection = () => {
           </span>
         </motion.div>
 
-        {/* Heading: Scaled down for Desktop */}
+        {/* Heading */}
         <div className="flex flex-col items-center gap-4 md:gap-6">
           <motion.h1
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-foreground leading-[1.1] tracking-tighter max-w-4xl"
+            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-serif font-bold text-foreground leading-[1.1] tracking-tighter max-w-4xl"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -59,7 +61,7 @@ export const HeroSection = () => {
         </div>
 
         <motion.p
-          className="text-sm md:text-lg text-muted-foreground leading-relaxed max-w-xl font-light"
+          className="text-sm md:text-lg text-foreground/80 leading-relaxed max-w-xl font-normal drop-shadow-sm"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
@@ -67,7 +69,7 @@ export const HeroSection = () => {
           {t.hero.tagline}
         </motion.p>
 
-        {/* Actions: Scaled down for Desktop */}
+        {/* Actions */}
         <motion.div
           className="flex flex-col sm:flex-row items-center gap-4 md:gap-6 mt-2 md:mt-4"
           initial={{ opacity: 0, y: 10 }}
@@ -76,7 +78,7 @@ export const HeroSection = () => {
         >
           <a
             href="#work"
-            className="group w-full sm:w-auto flex items-center justify-center gap-4 px-8 py-3.5 md:px-9 md:py-4 bg-primary text-primary-foreground font-bold tracking-widest uppercase text-[9px] md:text-[10px] hover:opacity-90 transition-all"
+            className="group w-full sm:w-auto flex items-center justify-center gap-4 px-8 py-3.5 md:px-9 md:py-4 bg-primary text-primary-foreground font-bold tracking-widest uppercase text-[9px] md:text-[10px] hover:scale-105 transition-all duration-300"
           >
             {t.hero.ctaWork}
             <ArrowDownRight size={14} className="group-hover:translate-x-1 group-hover:translate-y-1 transition-transform" />
@@ -85,7 +87,7 @@ export const HeroSection = () => {
             href={profile.resumeUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="group w-full sm:w-auto flex items-center justify-center gap-4 px-8 py-3.5 md:px-9 md:py-4 border border-border text-foreground font-bold tracking-widest uppercase text-[9px] md:text-[10px] hover:bg-muted/30 transition-all"
+            className="group w-full sm:w-auto flex items-center justify-center gap-4 px-8 py-3.5 md:px-9 md:py-4 border border-foreground/20 bg-background/20 backdrop-blur-md text-foreground font-bold tracking-widest uppercase text-[9px] md:text-[10px] hover:bg-foreground hover:text-background hover:scale-105 transition-all duration-300 shadow-xl shadow-black/5"
           >
             {t.hero.ctaResume}
           </a>
@@ -97,5 +99,6 @@ export const HeroSection = () => {
         <div className="w-px h-8 bg-border" />
       </div>
     </section>
+    </>
   );
 };

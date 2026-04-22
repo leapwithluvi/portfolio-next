@@ -164,12 +164,12 @@ export const GithubSection = () => {
              {/* Custom Legend */}
              <div className="mt-6 flex justify-between items-center text-[10px] font-bold tracking-widest text-muted-foreground uppercase">
                 <span>{t.github.less}</span>
-                <div className="flex gap-1.5">
-                   <div className="w-3 h-3 bg-muted" />
-                   <div className="w-3 h-3 bg-accent/30" />
-                   <div className="w-3 h-3 bg-accent/60" />
-                   <div className="w-3 h-3 bg-accent" />
-                   <div className="w-3 h-3 bg-primary" />
+                <div className="flex gap-2">
+                   <div className="w-3.5 h-3.5 rounded-sm border border-border/50 bg-[#E2EAF0] dark:bg-[#1A3A4A]" />
+                   <div className="w-3.5 h-3.5 rounded-sm border border-border/50 bg-[#A8D8EA] dark:bg-[#2A5068]" />
+                   <div className="w-3.5 h-3.5 rounded-sm border border-border/50 bg-[#7EC8E3] dark:bg-[#4FA3C7]" />
+                   <div className="w-3.5 h-3.5 rounded-sm border border-border/50 bg-[#4FA3C7] dark:bg-[#7EC8E3]" />
+                   <div className="w-3.5 h-3.5 rounded-sm border border-border/50 bg-[#3A5568] dark:bg-[#E8F4FF]" />
                 </div>
                 <span>{t.github.more}</span>
              </div>

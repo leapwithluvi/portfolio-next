@@ -26,7 +26,7 @@ export const AboutSection = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            <div className="relative aspect-4/5 w-full max-w-120 mx-auto border border-border p-3 bg-muted/5 group">
+            <div className="relative aspect-4/5 w-full max-w-120 mx-auto border border-border p-3 bg-muted/5 group shadow-2xl shadow-accent/5 transition-all duration-700 hover:shadow-accent/10">
               <div className="relative w-full h-full overflow-hidden bg-muted">
                 <Image 
                   src={profile.image} 
@@ -100,7 +100,7 @@ export const AboutSection = () => {
               </div>
               
               <div className="flex flex-col gap-2">
-                <span className="text-5xl md:text-6xl font-serif font-bold text-foreground group-hover:text-accent transition-colors duration-500">
+                <span className="text-6xl md:text-7xl font-serif font-bold text-foreground group-hover:text-accent transition-colors duration-500">
                   {stat.value}
                 </span>
                 <span className="text-[10px] md:text-xs font-mono uppercase tracking-[0.3em] text-muted-foreground group-hover:text-foreground transition-colors">

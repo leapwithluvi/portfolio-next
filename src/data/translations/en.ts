@@ -61,7 +61,11 @@ export const en = {
     frontend: "Front-End",
     backend: "Back-End",
     aiml: "AI & ML",
-    infra: "Infrastructure"
+    infra: "Infrastructure",
+    frontendDesc: "Crafting immersive user interfaces with a focus on pixel-perfection, motion design, and responsive architecture.",
+    backendDesc: "Architecting robust server-side systems, scalable APIs, and secure database schemas for high-concurrency applications.",
+    aimlDesc: "Implementing intelligent systems through neural networks, computer vision, and data-driven predictive modeling.",
+    infraDesc: "Orchestrating cloud environments, CI/CD pipelines, and automated testing for reliable software delivery."
   },
   projects: {
     badge: "Showcase of Craft",

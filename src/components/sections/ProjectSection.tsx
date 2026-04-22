@@ -39,7 +39,7 @@ export const ProjectSection: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.8 }}
-              className="bg-background group relative aspect-square md:aspect-[4/3] overflow-hidden flex flex-col p-8 md:p-12 hover:bg-muted/10 transition-colors"
+              className="bg-background group relative aspect-square md:aspect-4/3 overflow-hidden flex flex-col p-8 md:p-12 hover:bg-muted/5 transition-all duration-700 hover:scale-[1.01] hover:shadow-2xl hover:shadow-accent/5"
             >
                <div className="absolute top-8 right-8 text-meta opacity-30 group-hover:opacity-100 transition-opacity">
                  0{index + 1}

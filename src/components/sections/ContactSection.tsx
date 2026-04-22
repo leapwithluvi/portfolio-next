@@ -84,13 +84,13 @@ export const ContactSection = () => {
            viewport={{ once: true }}
            transition={{ duration: 0.4 }}
         >
-           <a
-              href={socials.find(s => s.name === "Email")?.href || "#"}
-              className="group flex items-center gap-4 px-10 py-5 md:px-16 md:py-8 bg-primary text-primary-foreground font-bold tracking-[0.4em] uppercase text-[10px] hover:opacity-90 transition-all duration-300"
-           >
-              {t.contact.establish}
-              <div className="w-1.5 h-1.5 bg-background rounded-full animate-pulse" />
-           </a>
+            <a
+               href={socials.find(s => s.name === "Email")?.href || "#"}
+               className="group flex items-center gap-4 px-10 py-5 md:px-16 md:py-8 bg-primary text-primary-foreground font-bold tracking-[0.4em] uppercase text-[10px] hover:scale-105 transition-all duration-500 shadow-2xl shadow-primary/10"
+            >
+               {t.contact.establish}
+               <div className="w-1.5 h-1.5 bg-background rounded-full animate-pulse group-hover:scale-150 transition-transform" />
+            </a>
         </motion.div>
       </div>
     </section>

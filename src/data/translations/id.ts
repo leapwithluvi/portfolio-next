@@ -61,7 +61,11 @@ export const id = {
     frontend: "Front-End",
     backend: "Back-End",
     aiml: "AI & Kecerdasan Buatan",
-    infra: "Infrastruktur"
+    infra: "Infrastruktur",
+    frontendDesc: "Merancang antarmuka pengguna yang imersif dengan fokus pada kesempurnaan piksel, desain gerak, dan arsitektur responsif.",
+    backendDesc: "Membangun sistem sisi server yang kokoh, API yang skalabel, dan skema database aman untuk aplikasi dengan konkurensi tinggi.",
+    aimlDesc: "Mengimplementasikan sistem cerdas melalui jaringan saraf, visi komputer, dan pemodelan prediktif berbasis data.",
+    infraDesc: "Mengelola lingkungan cloud, pipa CI/CD, dan pengujian otomatis untuk pengiriman perangkat lunak yang andal."
   },
   projects: {
     badge: "Etalase Karya",

@@ -213,7 +213,7 @@ export const techStack: TechStack[] = [
     name: "SciPy",
     category: "ai_ml",
     type: "Scientific Computing Library",
-    logo: "https://cdn.simpleicons.org/scipy/4DABCF",
+    logo: "https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/scipy.svg",
     url: "https://scipy.org/",
   },
   {
@@ -234,7 +234,7 @@ export const techStack: TechStack[] = [
     name: "Seaborn",
     category: "ai_ml",
     type: "Data Visualization Library",
-    logo: "https://seaborn.pydata.org/_images/logo-mark-lightbg.svg",
+    logo: "https://raw.githubusercontent.com/mwaskom/seaborn/master/doc/_static/logo-mark-lightbg.svg",
     url: "https://seaborn.pydata.org/",
   },
   {
@@ -269,7 +269,7 @@ export const techStack: TechStack[] = [
     name: "Ollama",
     category: "ai_ml",
     type: "Local LLM Framework",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/ollama/ollama-original.svg",
+    logo: "https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/ollama.svg",
     url: "https://ollama.com/",
   },
 ];

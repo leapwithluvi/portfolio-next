@@ -22,7 +22,7 @@ export const CertificateSection = () => {
       <div className="max-container">
         <div className="flex flex-col gap-12 mb-12 md:mb-24">
           <div className="text-label text-accent">{t.certificates.badge}</div>
-          <h2 className="text-6xl md:text-8xl font-serif font-bold text-foreground leading-[0.8] tracking-tighter">
+          <h2 className="text-4xl md:text-8xl font-serif font-bold text-foreground leading-[0.8] tracking-tighter">
             {t.certificates.title}
           </h2>
           <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl font-light leading-relaxed">
@@ -63,14 +63,14 @@ export const CertificateSection = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.98 }}
                 transition={{ duration: 0.5, ease: "easeOut" }}
-                className="group grid grid-cols-1 lg:grid-cols-12 gap-8 py-10 md:py-16 border-b border-border items-center hover:bg-muted/30 transition-colors duration-500"
+                className="group grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 py-8 md:py-16 border-b border-border items-center hover:bg-muted/30 transition-colors duration-500"
               >
                 <div className="lg:col-span-1 text-meta opacity-30 group-hover:opacity-100 uppercase">
                    {index < 9 ? `0${index + 1}` : index + 1}
                 </div>
                 
                 <div className="lg:col-span-1 flex justify-center">
-                   <div className="relative w-10 h-10 grayscale group-hover:grayscale-0 transition-all opacity-50 group-hover:opacity-100">
+                   <div className="relative w-12 h-12 grayscale group-hover:grayscale-0 transition-all duration-700 opacity-40 group-hover:opacity-100 scale-90 group-hover:scale-110">
                      <Image src={cert.issuerLogo} alt={cert.issuer} fill className="object-contain" />
                    </div>
                 </div>

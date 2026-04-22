@@ -55,7 +55,6 @@ export const Navbar: React.FC = () => {
             <span className="text-sm font-bold uppercase tracking-widest text-foreground">
               {profile.logoName}
             </span>
-            <div className="w-1.5 h-1.5 bg-accent rounded-full group-hover:animate-ping" />
           </a>
  
           {/* Nav Links */}
@@ -64,10 +63,10 @@ export const Navbar: React.FC = () => {
               <a
                 key={link.name}
                 href={link.href}
-                className="text-label text-[9px] text-muted-foreground hover:text-accent transition-colors relative group"
+                className="text-label text-[9px] text-muted-foreground hover:text-accent transition-colors relative group py-2 px-1"
               >
                 {(t.nav as Record<string, string>)[link.name.toLowerCase()]}
-                <span className="absolute -bottom-1 left-0 w-0 h-px bg-accent transition-all duration-300 group-hover:w-full" />
+                <span className="absolute bottom-1 left-1 w-0 h-px bg-accent transition-all duration-300 group-hover:w-full" />
               </a>
             ))}
             
