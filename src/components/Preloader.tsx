@@ -7,26 +7,13 @@ import { profile } from "@/data/profile";
 
 export default function Preloader() {
   const pathname = usePathname();
-  // Initialize isLoading based on pathname to avoid cascading render in useEffect
-  const [isLoading, setIsLoading] = useState(pathname === "/");
+  const [isLoading, setIsLoading] = useState(false);
   const [count, setCount] = useState(0);
   const isHomePage = pathname === "/";
 
-  // Handle scroll lock correctly
-  useEffect(() => {
-    if (isLoading && isHomePage) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [isLoading, isHomePage]);
-
   const startInitialization = useCallback(() => {
     const startTime = Date.now();
-    const duration = 800;
+    const duration = 1200; 
 
     const updateCounter = () => {
       const now = Date.now();
@@ -40,8 +27,9 @@ export default function Preloader() {
       } else {
         setTimeout(() => {
           setIsLoading(false);
+          sessionStorage.setItem("has-loaded", "true");
           window.dispatchEvent(new Event("loader-finished"));
-        }, 200);
+        }, 300);
       }
     };
 
@@ -49,10 +37,31 @@ export default function Preloader() {
   }, []);
 
   useEffect(() => {
-    if (isHomePage) {
-      startInitialization();
-    }
+    // Wrap in requestAnimationFrame to avoid synchronous setState warning and cascading renders
+    const frame = requestAnimationFrame(() => {
+      const hasLoaded = sessionStorage.getItem("has-loaded");
+      if (isHomePage && !hasLoaded) {
+        setIsLoading(true);
+        startInitialization();
+      } else {
+        setIsLoading(false);
+        window.dispatchEvent(new Event("loader-finished"));
+      }
+    });
+
+    return () => cancelAnimationFrame(frame);
   }, [isHomePage, startInitialization]);
+
+  useEffect(() => {
+    if (isLoading) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isLoading]);
 
   return (
     <AnimatePresence>

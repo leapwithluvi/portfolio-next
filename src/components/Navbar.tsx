@@ -1,13 +1,18 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 import { motion, AnimatePresence } from "motion/react";
-import { Menu, X, Sun, Moon, Globe } from "lucide-react";
+import { Menu, X, Sun, Moon, Globe, ArrowLeft } from "lucide-react";
 import { profile } from "@/data/profile";
 import { navLinks } from "@/data/navigation";
 import { useTranslation } from "@/hooks/useTranslation";
 
 export const Navbar = () => {
+  const pathname = usePathname();
+  const isProjectPage = pathname.startsWith("/projects/");
+  
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDark, setIsDark] = useState(true);
@@ -69,20 +74,29 @@ export const Navbar = () => {
     <>
       <nav
         className={`fixed top-0 left-0 right-0 z-100 transition-all duration-500 border-b will-change-transform ${
-          isScrolled ? "bg-background/80 backdrop-blur-sm border-border py-4" : "bg-transparent border-transparent py-8"
+          isScrolled || isProjectPage ? "bg-background/80 backdrop-blur-md border-border py-4" : "bg-transparent border-transparent py-8"
         }`}
       >
         <div className="max-container flex justify-between items-center px-4 md:px-0">
-          {/* Logo */}
-          <a href="#home" className="flex items-center gap-2 group">
-            <span className="text-sm md:text-base font-bold uppercase tracking-widest text-foreground">
-              {profile.logoName}
-            </span>
-          </a>
+          {/* Logo or Back Button */}
+          {isProjectPage ? (
+            <Link href="/#work" className="flex items-center gap-2 group text-accent">
+              <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
+              <span className="text-xs font-bold uppercase tracking-widest">
+                {t.nav.projects}
+              </span>
+            </Link>
+          ) : (
+            <a href="#home" className="flex items-center gap-2 group">
+              <span className="text-sm md:text-base font-bold uppercase tracking-widest text-foreground">
+                {profile.logoName}
+              </span>
+            </a>
+          )}
 
           {/* Desktop Nav */}
           <div className="hidden lg:flex items-center gap-10">
-            {navLinks.map((link) => (
+            {!isProjectPage && navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}

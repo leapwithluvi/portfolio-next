@@ -1,5 +1,6 @@
-"use client"
+"use client";
 
+import Link from "next/link";
 import { motion } from "motion/react";
 import { ArrowDownRight } from "lucide-react";
 import { projects } from "@/data/projects";
@@ -33,43 +34,42 @@ export const ProjectSection: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border border border-border">
           {projects.slice(0, 2).map((project, index) => (
-            <motion.div 
+            <Link 
               key={project.nameProject}
-              initial={{ opacity: 0, y: typeof window !== 'undefined' && window.innerWidth < 768 ? 0 : 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1, duration: 0.8 }}
+              href={`/projects/${project.slug}`}
               className="bg-background group relative aspect-square md:aspect-4/3 overflow-hidden flex flex-col p-8 md:p-12 hover:bg-muted/5 transition-all duration-700 hover:scale-[1.01] hover:shadow-2xl hover:shadow-accent/5"
             >
-               <div className="absolute top-8 right-8 text-meta opacity-30 group-hover:opacity-100 transition-opacity" aria-hidden="true">
-                 0{index + 1}
-               </div>
-               
-               <div className="flex flex-col gap-6 mt-auto">
-                 <div className="flex flex-col gap-2">
-                    <div className="text-meta uppercase tracking-widest text-accent font-bold">{project.classification}</div>
-                    <h3 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold group-hover:text-accent transition-colors leading-none tracking-tighter">
-                      {project.nameProject}
-                    </h3>
+               <motion.div
+                 initial={{ opacity: 0, y: typeof window !== 'undefined' && window.innerWidth < 768 ? 0 : 30 }}
+                 whileInView={{ opacity: 1, y: 0 }}
+                 viewport={{ once: true }}
+                 transition={{ delay: index * 0.1, duration: 0.8 }}
+                 className="flex flex-col h-full"
+               >
+                 <div className="absolute top-8 right-8 text-meta opacity-30 group-hover:opacity-100 transition-opacity" aria-hidden="true">
+                   0{index + 1}
                  </div>
                  
-                 <p className="text-muted-foreground text-sm line-clamp-2 max-w-sm leading-relaxed">
-                   {project.deskProject}
-                 </p>
-                 
-                 <div className="flex gap-6 mt-4">
-                   <a 
-                     href={project.linkRepo} 
-                     target="_blank" 
-                     rel="noopener noreferrer"
-                     className="text-label text-[10px] border-b border-border pb-1 hover:text-accent hover:border-accent transition-all font-bold uppercase tracking-[0.2em]"
-                     aria-label={`View ${project.nameProject} source code on GitHub`}
-                   >
-                     {t.projects.inspect}
-                   </a>
+                 <div className="flex flex-col gap-6 mt-auto">
+                   <div className="flex flex-col gap-2">
+                      <div className="text-meta uppercase tracking-widest text-accent font-bold">{project.classification}</div>
+                      <h3 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold group-hover:text-accent transition-colors leading-none tracking-tighter">
+                        {project.nameProject}
+                      </h3>
+                   </div>
+                   
+                   <p className="text-muted-foreground text-sm line-clamp-2 max-w-sm leading-relaxed">
+                     {project.deskProject}
+                   </p>
+                   
+                   <div className="flex gap-6 mt-4">
+                     <span className="text-label text-[10px] border-b border-border pb-1 group-hover:text-accent group-hover:border-accent transition-all font-bold uppercase tracking-[0.2em]">
+                       {t.projects.inspect}
+                     </span>
+                   </div>
                  </div>
-               </div>
-            </motion.div>
+               </motion.div>
+            </Link>
           ))}
         </div>
 
@@ -91,52 +91,51 @@ export const ProjectSection: React.FC = () => {
             </div>
 
             {projects.map((project, index) => (
-              <motion.div 
+              <Link 
                 key={project.nameProject}
-                initial={{ opacity: 0, y: typeof window !== 'undefined' && window.innerWidth < 768 ? 0 : 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.05 }}
+                href={`/projects/${project.slug}`}
                 className="group grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-4 py-4 md:py-6 border-b border-border items-center hover:bg-muted/30 transition-all px-4"
               >
-                <div className="lg:col-span-1 font-mono text-[10px] opacity-60 group-hover:opacity-100 transition-opacity">
-                  {project.year}
-                </div>
-                
-                <div className="lg:col-span-4 flex flex-col gap-1">
-                  <h4 className="text-sm font-bold uppercase tracking-tight group-hover:text-accent transition-colors">
-                    {project.nameProject}
-                  </h4>
-                  <div className="lg:hidden text-[10px] opacity-60 uppercase tracking-widest font-medium">{project.classification}</div>
-                </div>
+                <motion.div 
+                  initial={{ opacity: 0, y: typeof window !== 'undefined' && window.innerWidth < 768 ? 0 : 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.05 }}
+                  className="contents"
+                >
+                  <div className="lg:col-span-1 font-mono text-[10px] opacity-60 group-hover:opacity-100 transition-opacity">
+                    {project.year}
+                  </div>
+                  
+                  <div className="lg:col-span-4 flex flex-col gap-1">
+                    <h4 className="text-sm font-bold uppercase tracking-tight group-hover:text-accent transition-colors">
+                      {project.nameProject}
+                    </h4>
+                    <div className="lg:hidden text-[10px] opacity-60 uppercase tracking-widest font-medium">{project.classification}</div>
+                  </div>
 
-                <div className="hidden lg:flex lg:col-span-2 text-[10px] uppercase tracking-widest opacity-80 font-medium">
-                  {project.classification}
-                </div>
+                  <div className="hidden lg:flex lg:col-span-2 text-[10px] uppercase tracking-widest opacity-80 font-medium">
+                    {project.classification}
+                  </div>
 
-                <div className="lg:col-span-4 flex flex-wrap gap-x-4 gap-y-1">
-                  {project.stacks.slice(0, 4).map((stack) => (
-                    <span key={stack} className="text-[10px] font-mono opacity-60 group-hover:opacity-100 transition-opacity">
-                      /{stack.replace(/\s+/g, '_')}
-                    </span>
-                  ))}
-                  {project.stacks.length > 4 && (
-                    <span className="text-[10px] font-mono opacity-40">+{project.stacks.length - 4}</span>
-                  )}
-                </div>
+                  <div className="lg:col-span-4 flex flex-wrap gap-x-4 gap-y-1">
+                    {project.stacks.slice(0, 4).map((stack) => (
+                      <span key={stack} className="text-[10px] font-mono opacity-60 group-hover:opacity-100 transition-opacity">
+                        /{stack.replace(/\s+/g, '_')}
+                      </span>
+                    ))}
+                    {project.stacks.length > 4 && (
+                      <span className="text-[10px] font-mono opacity-40">+{project.stacks.length - 4}</span>
+                    )}
+                  </div>
 
-                <div className="lg:col-span-1 flex justify-end">
-                  <a 
-                    href={project.linkRepo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-2 border border-border/50 hover:bg-foreground hover:text-background transition-colors"
-                    aria-label={`Inspect ${project.nameProject} source code`}
-                  >
-                    <ArrowDownRight size={12} className="-rotate-45" aria-hidden="true" />
-                  </a>
-                </div>
-              </motion.div>
+                  <div className="lg:col-span-1 flex justify-end">
+                    <div className="p-2 border border-border/50 group-hover:bg-foreground group-hover:text-background transition-colors">
+                      <ArrowDownRight size={12} className="-rotate-45" aria-hidden="true" />
+                    </div>
+                  </div>
+                </motion.div>
+              </Link>
             ))}
           </div>
         </div>
@@ -150,14 +149,14 @@ export const ProjectSection: React.FC = () => {
             <p className="text-muted-foreground text-center md:text-left leading-relaxed">
               {t.projects.footerDescription}
             </p>
-            <a 
-              href="#contact" 
+            <Link 
+              href="/#contact" 
               className="group flex items-center gap-4 px-10 py-5 bg-primary text-primary-foreground font-bold tracking-[0.2em] uppercase text-[10px] hover:opacity-90 transition-all duration-500"
               aria-label="Navigate to contact section"
             >
               {t.contact.getInTouch}
               <ArrowDownRight size={16} className="group-hover:translate-x-1 group-hover:translate-y-1 transition-transform" aria-hidden="true" />
-            </a>
+            </Link>
           </div>
         </div>
       </div>

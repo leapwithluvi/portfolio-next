@@ -1,62 +1,77 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import Lenis from "lenis";
 
 export default function SmoothScroll({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
+  const lenisRef = useRef<Lenis | null>(null);
+
   useEffect(() => {
-    // Disable Lenis on touch/mobile devices — native scroll is smoother
-    const isTouchDevice = "ontouchstart" in window || navigator.maxTouchPoints > 0;
-    if (isTouchDevice) {
-      // Still fire loader-finished so preloader unblocks correctly
-      window.history.scrollRestoration = "manual";
-      window.scrollTo(0, 0);
-      const handleLoaderFinished = () => {};
-      window.addEventListener("loader-finished", handleLoaderFinished);
-      return () => window.removeEventListener("loader-finished", handleLoaderFinished);
-    }
-
-    // Desktop: use Lenis smooth scroll
     window.history.scrollRestoration = "manual";
-    window.scrollTo(0, 0);
-
+    
     const lenis = new Lenis({
-      duration: 1.0,           // Reduced from 1.2 → snappier feel
+      duration: 1.0,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: "vertical",
       gestureOrientation: "vertical",
       smoothWheel: true,
       wheelMultiplier: 1,
-      touchMultiplier: 1,      // Reduced from 2 → less aggressive on hybrid devices
+      touchMultiplier: 1.2,
       infinite: false,
     });
 
-    if (window.location.pathname === "/") {
+    lenisRef.current = lenis;
+
+    const raf = (time: number) => {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    };
+    requestAnimationFrame(raf);
+
+    // Initial sync
+    if (pathname === "/") {
       lenis.stop();
-      if (window.location.hash) {
-        window.scrollTo(0, 0);
-        window.history.replaceState(null, "", window.location.pathname);
-      }
+    } else {
+      lenis.start();
     }
 
     const handleLoaderFinished = () => {
-      lenis.start();
+      if (lenisRef.current) {
+        lenisRef.current.start();
+      }
     };
 
     window.addEventListener("loader-finished", handleLoaderFinished);
 
-    function raf(time: number) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-
-    requestAnimationFrame(raf);
-
     return () => {
-      lenis.destroy();
+      if (lenisRef.current) {
+        lenisRef.current.destroy();
+      }
       window.removeEventListener("loader-finished", handleLoaderFinished);
     };
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Truly init once, pathname logic is handled below
+
+  // Handle route changes separately
+  useEffect(() => {
+    if (lenisRef.current) {
+      if (pathname === "/") {
+        // Don't auto-start on home if loader might run
+        const hasLoaded = sessionStorage.getItem("has-loaded");
+        if (!hasLoaded) {
+          lenisRef.current.stop();
+        } else {
+          lenisRef.current.start();
+        }
+      } else {
+        lenisRef.current.start();
+      }
+      lenisRef.current.scrollTo(0, { immediate: true });
+    }
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   return <>{children}</>;
 }

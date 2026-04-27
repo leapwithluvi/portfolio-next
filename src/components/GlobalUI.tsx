@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 
 import { useEffect } from "react";
 
-// Non-critical UI components - Lazy loaded for performance
+// Non-critical UI components - Lazy loaded for performancemen
 const CommandPalette = dynamic(() => import("./CommandPalette"), { ssr: false });
 const BackToTop = dynamic(() => import("./BackToTop"), { ssr: false });
 

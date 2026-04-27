@@ -34,50 +34,72 @@ export const GithubSection = () => {
     const frame = requestAnimationFrame(() => setMounted(true));
     
     async function fetchStats() {
-      // Try to load from cache first
+      // 1. Try to load from cache first for immediate UI feedback
       const cached = localStorage.getItem(`github-stats-${username}`);
       if (cached) {
         try {
           setStats(JSON.parse(cached));
         } catch {
-          // Silent catch for invalid JSON
+          localStorage.removeItem(`github-stats-${username}`);
         }
       }
 
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 8000); // 8s timeout
+
       try {
-        const userRes = await fetch(`https://api.github.com/users/${username}`);
         let githubData: Partial<GitHubStats> = {};
 
-        if (userRes.ok) {
-          const userData = await userRes.json();
-          githubData = {
-            repos: userData.public_repos || 0,
-            followers: userData.followers || 0,
-            yearJoined: userData.created_at ? new Date(userData.created_at).getFullYear() : 0,
-          };
-        }
-
-        const contribRes = await fetch(`https://github-contributions-api.deno.dev/${username}.json`);
-        if (contribRes.ok) {
-          const contribData = await contribRes.json();
-          let total = 0;
-          if (contribData.totalContributions) {
-            total = contribData.totalContributions;
-          } else if (contribData.contributions) {
-            const currentYear = new Date().getFullYear();
-            const yearData = contribData.contributions.find((y: ContributionYear) => y.year === currentYear);
-            if (yearData) total = yearData.totalContributions;
+        // 2. Fetch User Profile Stats
+        try {
+          const userRes = await fetch(`https://api.github.com/users/${username}`, { 
+            signal: controller.signal 
+          });
+          if (userRes.ok) {
+            const userData = await userRes.json();
+            githubData = {
+              repos: userData.public_repos || 0,
+              followers: userData.followers || 0,
+              yearJoined: userData.created_at ? new Date(userData.created_at).getFullYear() : 0,
+            };
           }
-          githubData.contributions = total;
+        } catch (e) {
+          console.warn("GitHub Profile fetch failed:", e);
         }
 
-        setStats((prev) => {
-          const updated = { ...prev, ...githubData };
-          localStorage.setItem(`github-stats-${username}`, JSON.stringify(updated));
-          return updated;
-        });
+        // 3. Fetch Contribution Stats (External API)
+        try {
+          const contribRes = await fetch(`https://github-contributions-api.deno.dev/${username}.json`, { 
+            signal: controller.signal 
+          });
+          if (contribRes.ok) {
+            const contribData = await contribRes.json();
+            let total = 0;
+            if (contribData.totalContributions) {
+              total = contribData.totalContributions;
+            } else if (contribData.contributions) {
+              const currentYear = new Date().getFullYear();
+              const yearData = contribData.contributions.find((y: ContributionYear) => y.year === currentYear);
+              if (yearData) total = yearData.totalContributions;
+            }
+            githubData.contributions = total;
+          }
+        } catch (e) {
+          console.warn("GitHub Contributions fetch failed:", e);
+        }
+
+        // 4. Update State if we got any new data
+        if (Object.keys(githubData).length > 0) {
+          setStats((prev) => {
+            const updated = { ...prev, ...githubData };
+            localStorage.setItem(`github-stats-${username}`, JSON.stringify(updated));
+            return updated;
+          });
+        }
       } catch (error) {
-        console.error("Error fetching github stats:", error);
+        console.error("Critical error in GithubSection:", error);
+      } finally {
+        clearTimeout(timeoutId);
       }
     }
     fetchStats();
