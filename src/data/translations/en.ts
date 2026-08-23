@@ -65,7 +65,14 @@ export const en = {
     frontendDesc: "Crafting immersive user interfaces with a focus on pixel-perfection, motion design, and responsive architecture.",
     backendDesc: "Architecting robust server-side systems, scalable APIs, and secure database schemas for high-concurrency applications.",
     aimlDesc: "Implementing intelligent systems through neural networks, computer vision, and data-driven predictive modeling.",
-    infraDesc: "Orchestrating cloud environments, CI/CD pipelines, and automated testing for reliable software delivery."
+    infraDesc: "Orchestrating cloud environments, CI/CD pipelines, and automated testing for reliable software delivery.",
+    filters: {
+      all: "All",
+      web: "Web",
+      ai_ml: "AI / ML",
+      data_science: "Data Science",
+      data_engineer: "Data Engineer"
+    }
   },
   projects: {
     badge: "Showcase of Craft",

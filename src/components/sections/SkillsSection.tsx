@@ -1,15 +1,20 @@
 "use client"
 
 import { motion } from "motion/react";
-import { techStack, skills } from "@/data/techstack";
+import { techStack, skills, type TechDomain } from "@/data/techstack";
 import { useTranslation } from "@/hooks/useTranslation";
 import { Terminal, Cpu, LayoutPanelLeft, Network, ShieldCheck } from "lucide-react";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 
+type DomainFilter = TechDomain | "all";
+
+const DOMAIN_FILTERS: DomainFilter[] = ["all", "web", "ai_ml", "data_science", "data_engineer"];
+
 export const SkillsSection = () => {
   const { t } = useTranslation();
   const [mounted, setMounted] = useState(false);
+  const [activeDomain, setActiveDomain] = useState<DomainFilter>("all");
 
   useEffect(() => {
     const frame = requestAnimationFrame(() => setMounted(true));
@@ -17,6 +22,10 @@ export const SkillsSection = () => {
   }, []);
 
   if (!mounted) return null;
+
+  const filteredStack = activeDomain === "all"
+    ? techStack
+    : techStack.filter((tech) => tech.domains.includes(activeDomain));
 
   // Mapping icons based on the icon string in data
   const getIcon = (iconName: string) => {
@@ -55,7 +64,7 @@ export const SkillsSection = () => {
               {t.skills.description}
             </p>
             <div className="flex flex-col gap-1">
-               <span className="text-[9px] font-mono uppercase tracking-[0.5em] text-accent">Deployment_Ready_v4.2</span>
+               <span className="text-[9px] font-mono uppercase tracking-[0.5em] text-accent">Deployment Ready v4.2</span>
                <div className="flex lg:justify-end gap-2 opacity-20">
                   <div className="w-2 h-2 rounded-full bg-foreground" />
                   <div className="w-2 h-2 rounded-full bg-foreground" />
@@ -69,7 +78,7 @@ export const SkillsSection = () => {
         <div className="flex flex-col border-t border-border">
           {skills.map((category, index) => {
             const Icon = getIcon(category.icon);
-            const descKey = `${category.titleKey}Desc` as keyof typeof t.skills;
+            const descKey = `${category.titleKey}Desc` as Exclude<keyof typeof t.skills, "filters">;
             
             return (
               <motion.div 
@@ -95,7 +104,7 @@ export const SkillsSection = () => {
                          <Icon className="w-4 h-4 text-accent" />
                       </div>
                       <h3 className="text-3xl md:text-5xl font-serif font-bold text-foreground group-hover:translate-x-4 transition-transform duration-500">
-                        {(t.skills as Record<string, string>)[category.titleKey]}
+                        {t.skills[category.titleKey]}
                       </h3>
                       <p className="text-xs md:text-sm text-muted-foreground leading-relaxed max-w-md opacity-0 group-hover:opacity-100 group-hover:translate-x-4 transition-all duration-700">
                          {t.skills[descKey]}
@@ -120,34 +129,65 @@ export const SkillsSection = () => {
           })}
         </div>
 
-        {/* DNA Stack: Grayscale to Color Logos */}
+        {/* DNA Stack: Grayscale to Color Logos with Domain Filter */}
         <div className="mt-24 md:mt-48 flex flex-col gap-12 md:gap-24">
-           <div className="flex flex-col md:flex-row justify-between items-center gap-8 border-b border-border pb-8">
-              <div className="text-[10px] font-mono text-muted-foreground uppercase tracking-[0.5em]">Global_Integration_Standards</div>
-              <div className="text-[10px] font-mono text-muted-foreground uppercase tracking-[0.3em]">{t.common.dependencies}</div>
+           <div className="flex flex-col gap-8 border-b border-border pb-8">
+              <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+                 <div className="text-[10px] font-mono text-muted-foreground uppercase tracking-[0.5em]">Global Integration Standards</div>
+                 <div className="text-[10px] font-mono text-muted-foreground uppercase tracking-[0.3em]">{t.common.dependencies}</div>
+              </div>
+
+              {/* Domain Filter Chips */}
+              <div className="flex flex-wrap gap-2">
+                {DOMAIN_FILTERS.map((filter) => {
+                  const isActive = activeDomain === filter;
+                  const count = filter === "all"
+                    ? techStack.length
+                    : techStack.filter((tech) => tech.domains.includes(filter)).length;
+                  const label = t.skills.filters[filter];
+
+                  return (
+                    <button
+                      key={filter}
+                      type="button"
+                      onClick={() => setActiveDomain(filter)}
+                      aria-pressed={isActive}
+                      className={`group/filter flex items-center gap-2 px-4 py-2 border text-[10px] font-mono uppercase tracking-[0.25em] cursor-pointer transition-all duration-300 ${
+                        isActive
+                          ? "border-accent text-accent bg-accent/10"
+                          : "border-border text-muted-foreground hover:border-accent/50 hover:text-foreground"
+                      }`}
+                    >
+                      {label}
+                      <span className={`text-[9px] ${isActive ? "text-accent" : "opacity-40"}`}>
+                        [{count}]
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
            </div>
 
            <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-x-6 md:gap-x-20 gap-y-10 md:gap-y-24 items-center justify-items-center">
-             {techStack.map((tech) => (
-               <motion.a 
-                 key={tech.name} 
-                 href={tech.url} 
-                 target="_blank" 
+             {filteredStack.map((tech) => (
+               <a
+                 key={tech.name}
+                 href={tech.url}
+                 target="_blank"
                  rel="noopener noreferrer"
-                 whileHover={{ y: -5 }}
                  className="group/logo relative w-8 h-8 md:w-14 md:h-14 flex items-center justify-center md:grayscale hover:grayscale-0 transition-all duration-700"
                >
-                 <Image 
-                   src={tech.logo} 
-                   alt={tech.name} 
-                   fill 
-                   className="object-contain opacity-40 group-hover/logo:opacity-100 transition-opacity" 
-                   title={tech.name} 
+                 <Image
+                   src={tech.logo}
+                   alt={tech.name}
+                   fill
+                   className="object-contain opacity-40 group-hover/logo:opacity-100 transition-opacity"
+                   title={tech.name}
                  />
                  <div className="absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-1 bg-foreground text-background text-[8px] font-bold uppercase tracking-tighter opacity-0 group-hover/logo:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
                     {tech.name}
                  </div>
-               </motion.a>
+               </a>
              ))}
            </div>
         </div>

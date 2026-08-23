@@ -10,7 +10,7 @@ export const id = {
   common: {
     engineering: "Rekayasa",
     specialized: "Kapasitas_Terspesialisasi",
-    dependencies: "DEPENDENSI_SISTEM_INTI"
+    dependencies: "DEPENDENSI SISTEM INTI"
   },
   footer: {
     navigation: "Navigasi",
@@ -65,7 +65,14 @@ export const id = {
     frontendDesc: "Merancang antarmuka pengguna yang imersif dengan fokus pada kesempurnaan piksel, desain gerak, dan arsitektur responsif.",
     backendDesc: "Membangun sistem sisi server yang kokoh, API yang skalabel, dan skema database aman untuk aplikasi dengan konkurensi tinggi.",
     aimlDesc: "Mengimplementasikan sistem cerdas melalui jaringan saraf, visi komputer, dan pemodelan prediktif berbasis data.",
-    infraDesc: "Mengelola lingkungan cloud, pipa CI/CD, dan pengujian otomatis untuk pengiriman perangkat lunak yang andal."
+    infraDesc: "Mengelola lingkungan cloud, pipa CI/CD, dan pengujian otomatis untuk pengiriman perangkat lunak yang andal.",
+    filters: {
+      all: "Semua",
+      web: "Web",
+      ai_ml: "AI / ML",
+      data_science: "Data Science",
+      data_engineer: "Data Engineer"
+    }
   },
   projects: {
     badge: "Etalase Karya",

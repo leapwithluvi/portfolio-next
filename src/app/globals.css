@@ -71,10 +71,8 @@
   --font-sans: var(--font-space);
 }
 
-html {
-  scroll-behavior: smooth;
-  height: 100%;
-}
+/* NOTE: jangan set height/scroll-behavior di html — bentrok dengan Lenis
+   (lihat SmoothScroll.tsx yang mengimpor lenis/dist/lenis.css) */
 
 body {
   background: var(--background);
