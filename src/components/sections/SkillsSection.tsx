@@ -4,7 +4,7 @@ import { motion } from "motion/react";
 import { techStack, skills, type TechDomain } from "@/data/techstack";
 import { useTranslation } from "@/hooks/useTranslation";
 import { Terminal, Cpu, LayoutPanelLeft, Network, ShieldCheck } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Image from "next/image";
 
 type DomainFilter = TechDomain | "all";
@@ -13,15 +13,7 @@ const DOMAIN_FILTERS: DomainFilter[] = ["all", "web", "ai_ml", "data_science", "
 
 export const SkillsSection = () => {
   const { t } = useTranslation();
-  const [mounted, setMounted] = useState(false);
   const [activeDomain, setActiveDomain] = useState<DomainFilter>("all");
-
-  useEffect(() => {
-    const frame = requestAnimationFrame(() => setMounted(true));
-    return () => cancelAnimationFrame(frame);
-  }, []);
-
-  if (!mounted) return null;
 
   const filteredStack = activeDomain === "all"
     ? techStack

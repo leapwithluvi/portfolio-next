@@ -74,6 +74,11 @@ export const en = {
       data_engineer: "Data Engineer"
     }
   },
+  testimonials: {
+    badge: "Trusted By Others",
+    title: "Testimonials.",
+    description: "What mentors, teammates, and clients say about working with me."
+  },
   projects: {
     badge: "Showcase of Craft",
     title: "Recent Works",

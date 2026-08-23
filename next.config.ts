@@ -38,10 +38,6 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "railway.com",
-      },
-      {
-        protocol: "https",
-        hostname: "giffiles.alphacoders.com",
       }
     ],
   },

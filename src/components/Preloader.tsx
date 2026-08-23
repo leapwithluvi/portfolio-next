@@ -13,7 +13,7 @@ export default function Preloader() {
 
   const startInitialization = useCallback(() => {
     const startTime = Date.now();
-    const duration = 1200; 
+    const duration = 500;
 
     const updateCounter = () => {
       const now = Date.now();

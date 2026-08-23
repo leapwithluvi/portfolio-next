@@ -91,8 +91,6 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://api.github.com" />
         <link rel="dns-prefetch" href="https://api.github.com" />
-        <link rel="preconnect" href="https://giffiles.alphacoders.com" />
-        <link rel="dns-prefetch" href="https://giffiles.alphacoders.com" />
         {/* Anti-Flicker Theme Script */}
         <Script id="show-theme">
           {`

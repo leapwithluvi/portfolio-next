@@ -74,6 +74,11 @@ export const id = {
       data_engineer: "Data Engineer"
     }
   },
+  testimonials: {
+    badge: "Dipercaya Oleh",
+    title: "Testimoni.",
+    description: "Apa kata mentor, rekan tim, dan klien tentang bekerja bersama saya."
+  },
   projects: {
     badge: "Etalase Karya",
     title: "Proyek Terbaru",

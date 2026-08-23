@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { GitHubCalendar } from "react-github-calendar";
 import { Code, Terminal, Users, Calendar, ExternalLink } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
+import { socials } from "@/data/socials";
 
 interface GitHubStats {
   repos: number;
@@ -17,6 +18,9 @@ interface ContributionYear {
   totalContributions: number;
 }
 
+// Derived from the single source of truth in src/data/socials.ts
+const username = socials.find((s) => s.name.toLowerCase() === "github")?.href.split("/").pop() || "leapwithluvi";
+
 export const GithubSection = () => {
   const { t } = useTranslation();
   const [stats, setStats] = useState<GitHubStats>({
@@ -25,14 +29,16 @@ export const GithubSection = () => {
     yearJoined: 0,
     contributions: 0,
   });
-  const [mounted, setMounted] = useState(false);
-  
-  const username = "leapwithluvi";
+  // GitHubCalendar is not hydration-safe (client-side data fetch),
+  // so it mounts client-only with a placeholder to avoid layout shift.
+  const [calendarMounted, setCalendarMounted] = useState(false);
 
   useEffect(() => {
-    // Avoid synchronous setState in effect to prevent cascading render warning
-    const frame = requestAnimationFrame(() => setMounted(true));
-    
+    const frame = requestAnimationFrame(() => setCalendarMounted(true));
+    return () => cancelAnimationFrame(frame);
+  }, []);
+
+  useEffect(() => {
     async function fetchStats() {
       // 1. Try to load from cache first for immediate UI feedback
       const cached = localStorage.getItem(`github-stats-${username}`);
@@ -103,8 +109,6 @@ export const GithubSection = () => {
       }
     }
     fetchStats();
-    
-    return () => cancelAnimationFrame(frame);
   }, []);
 
   return (
@@ -186,7 +190,7 @@ export const GithubSection = () => {
 
              <div className="w-full flex justify-end overflow-x-auto pb-6 scrollbar-hide">
                 <div className="shrink-0 min-w-full">
-                  {mounted && (
+                  {calendarMounted ? (
                     <GitHubCalendar
                       username={username}
                       theme={{
@@ -196,6 +200,11 @@ export const GithubSection = () => {
                       blockSize={12}
                       blockMargin={4}
                       fontSize={11}
+                    />
+                  ) : (
+                    <div
+                      aria-hidden="true"
+                      className="w-full h-[104px] md:h-[112px] bg-muted/30 border border-border/50 animate-pulse"
                     />
                   )}
                 </div>

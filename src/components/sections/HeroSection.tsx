@@ -4,7 +4,6 @@ import { motion } from "motion/react";
 import { profile } from "@/data/profile";
 import { ArrowDownRight} from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
-import Image from "next/image";
  
 export const HeroSection = () => {
   const { t } = useTranslation();
@@ -16,17 +15,20 @@ export const HeroSection = () => {
       <section
         className="sticky top-0 h-screen flex flex-col justify-center items-center overflow-hidden bg-background z-0 pt-20 md:pt-32 pb-10 md:pb-20"
       >
-      {/* Background Background */}
+      {/* Background: looping pixel-art snow (hardware-decoded MP4, instant first paint via WebP poster) */}
       <div className="absolute inset-0 z-0">
-        <Image 
-          src="https://giffiles.alphacoders.com/211/211056.gif"
-          alt="Background"
-          fill
-          unoptimized
-          className="object-cover opacity-80 dark:opacity-80"
-          priority
-          fetchPriority="high"
-        />
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          poster="/images/hero-bg.webp"
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover opacity-80 dark:opacity-80 pointer-events-none"
+        >
+          <source src="/videos/hero-bg.mp4" type="video/mp4" />
+        </video>
         <div className="absolute inset-0 bg-linear-to-b from-background via-transparent to-background" />
       </div>
 
