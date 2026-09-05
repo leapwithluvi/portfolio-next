@@ -22,6 +22,51 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    slug: "nexus-ai",
+    nameProject: "Nexus AI",
+    classification: "Intelligent Interface",
+    role: "Fullstack Developer",
+    deskProject:
+      "Nexus AI is a lightweight yet powerful assistant designed for fast, intelligent, and private conversations.",
+    longDescription: `## About The Project
+
+**Nexus Neural Orchestrator** is a modern, high-performance Fullstack AI Chatbot built as a portfolio project to demonstrate end-to-end system architecture.
+
+### The Problem
+
+Most portfolio AI chatbots are simple wrappers around an API (relying heavily on the frontend), lacking real session management, secure backend routing, relational database storage, and proper stream handling. Developers usually get locked into SaaS template logic without understanding the underlying connections.
+
+### The Solution
+
+This project breaks that barrier by implementing a strict **Monorepo Separation of Concerns**. The Client (Next.js) only handles rendering and context, while the Backend (Bun + Hono) securely manages OAuth protocols, database logic (Neon + Drizzle), and direct Server-Sent Events (SSE) streaming with the Groq Inference Engine.
+
+### Why I Built This
+
+This platform was built to validate my full-stack capabilities—specifically tackling the complexities of **Real-Time Data Streaming, HTTP-Only Cookie Authentication, Database Schema Design, and UI/UX Layout Syncing**.`,
+    status: "Completed",
+    year: "2026",
+    linkRepo: "https://github.com",
+    linkDemo: "https://nexusai.my.id",
+    srcImg: "/images/projects/nexusai/screenshot.png",
+    imgAlt: "Nexus AI",
+    stacks: [
+      "Next.js 16",
+      "React 19",
+      "Tailwind CSS 4.0",
+      "Shadcn UI",
+      "Bun",
+      "HonoJS",
+      "Neon",
+      "Drizzle ORM",
+      "Groq LPU Engine",
+      "TypeScript",
+    ],
+    gallery: [
+      "/images/projects/nexusai/implement1.gif",
+      "/images/projects/nexusai/implement2.gif",
+    ],
+  },
+  {
     slug: "library-management-system",
     nameProject: "Library Management System",
     classification: "E-Library Architecture",
@@ -36,26 +81,18 @@ export const projects: Project[] = [
     linkDemo: "https://perpustakaan-teknologi.vercel.app",
     srcImg: "/images/projects/perpustakaan.png",
     imgAlt: "Library Management System",
-    stacks: ["React", "Express.js", "Prisma", "TypeScript", "Tailwind CSS", "Supabase"],
-    gallery: ["/images/projects/perpustakaan-1.png", "/images/projects/perpustakaan-2.png"]
-  },
-  {
-    slug: "nexus-ai",
-    nameProject: "Nexus AI",
-    classification: "Intelligent Interface",
-    role: "AI Integration Engineer",
-    deskProject:
-      "Nexus AI is a lightweight yet powerful assistant designed for fast, intelligent, and private conversations.",
-    longDescription:
-      "Nexus AI focuses on delivering a low-latency chat experience using specialized LLM integrations. The project required deep optimization of server-side streaming (using NestJS) and a clean, focus-oriented UI built with Next.js. Security was a top priority, ensuring all conversations remain private through encrypted sessions.",
-    status: "On-Going",
-    year: "2024",
-    linkRepo: "https://github.com/leapwithluvi/ai-chatbot",
-    linkDemo: "https://nexusai.my.id",
-    srcImg: "/images/projects/nexusai.png",
-    imgAlt: "Nexus AI",
-    stacks: ["Next.js", "NestJS", "Supabase", "Prisma", "Tailwind CSS", "TypeScript"],
-    gallery: ["/images/projects/nexusai-1.png"]
+    stacks: [
+      "React",
+      "Express.js",
+      "Prisma",
+      "TypeScript",
+      "Tailwind CSS",
+      "Supabase",
+    ],
+    gallery: [
+      "/images/projects/perpustakaan-1.png",
+      "/images/projects/perpustakaan-2.png",
+    ],
   },
   {
     slug: "portfolio-v1",
@@ -64,7 +101,7 @@ export const projects: Project[] = [
     role: "Frontend Developer",
     deskProject:
       "Portfolio is a personal website designed to showcase my projects, skills, and experience in web development. Built with Vite, React, Tailwind CSS, and Framer Motion, it features smooth animations, responsive design, and a clean modern interface.",
-    longDescription: 
+    longDescription:
       "Portfolio is a personal website designed to showcase my projects, skills, and experience in web development. Built with Vite, React, Tailwind CSS, and Framer Motion, it features smooth animations, responsive design, and a clean modern interface.",
     status: "Complete",
     year: "2023",
@@ -91,7 +128,7 @@ export const projects: Project[] = [
     srcImg: "/images/projects/portfoliov2.png",
     imgAlt: "Portfolio",
     stacks: ["Next.js", "React", "Tailwind CSS", "TypeScript", "Motion"],
-    gallery: ["/images/projects/portfoliov2-1.png"]
+    gallery: ["/images/projects/portfoliov2-1.png"],
   },
   {
     slug: "express-typescript-starter",
@@ -108,7 +145,7 @@ export const projects: Project[] = [
     srcImg: "/images/projects/backend.png",
     imgAlt: "Express TypeScript Starter",
     stacks: ["Express.js", "PostgreSQL", "Prisma", "TypeScript", "Node.js"],
-    gallery: ["/images/projects/backend-1.png"]
+    gallery: ["/images/projects/backend-1.png"],
   },
   {
     slug: "osis-voting-system",
@@ -126,6 +163,6 @@ export const projects: Project[] = [
     srcImg: "/images/projects/osis.png",
     imgAlt: "OSIS President Voting System",
     stacks: ["React", "Express.js", "MongoDB", "Prisma", "Tailwind CSS"],
-    gallery: ["/images/projects/osis-1.png"]
-  }
+    gallery: ["/images/projects/osis-1.png"],
+  },
 ];

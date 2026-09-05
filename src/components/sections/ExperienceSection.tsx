@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import { MapPin } from "lucide-react";
+import { MapPin, ArrowUpRight } from "lucide-react"; // Menambahkan ArrowUpRight sebagai indikator tautan luar
 import { experiences } from "@/data/experience";
 import { useTranslation } from "@/hooks/useTranslation";
 import Image from "next/image";
@@ -16,7 +16,9 @@ export const ExperienceSection = () => {
     >
       <div className="max-container">
         <div className="flex flex-col gap-12 mb-10 md:mb-20">
-          <div className="text-label text-accent font-bold uppercase tracking-widest">{t.experience.badge}</div>
+          <div className="text-label text-accent font-bold uppercase tracking-widest">
+            {t.experience.badge}
+          </div>
           <h2 className="text-4xl md:text-6xl font-serif font-bold text-foreground leading-[1.1] tracking-tighter">
             {t.experience.title}
           </h2>
@@ -25,18 +27,32 @@ export const ExperienceSection = () => {
         <div className="flex flex-col gap-0 border-t border-border">
           {experiences.map((exp, index) => {
             // Get translations for this specific company
-            const companyKey = exp.company.split(' ')[0].toLowerCase();
-            const companyData = (t.experience as unknown as Record<string, Record<string, string>>)[companyKey];
+            const companyKey = exp.company.split(" ")[0].toLowerCase();
+            const companyData = (
+              t.experience as unknown as Record<string, Record<string, string>>
+            )[companyKey];
 
             return (
-              <motion.div
+              <motion.a
                 key={index}
-                initial={{ opacity: 0, y: typeof window !== 'undefined' && window.innerWidth < 768 ? 0 : 20 }}
+                href={exp.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                initial={{
+                  opacity: 0,
+                  y:
+                    typeof window !== "undefined" && window.innerWidth < 768
+                      ? 0
+                      : 20,
+                }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="group grid grid-cols-1 lg:grid-cols-12 gap-8 py-12 md:py-20 border-b border-border items-start hover:bg-muted/30 transition-colors duration-500"
+                className="group grid grid-cols-1 lg:grid-cols-12 gap-8 py-12 md:py-20 border-b border-border items-start hover:bg-muted/30 transition-colors duration-500 cursor-pointer relative"
               >
-                <div className="lg:col-span-1 text-meta opacity-60 group-hover:opacity-100 transition-opacity font-mono" aria-hidden="true">
+                <div
+                  className="lg:col-span-1 text-meta opacity-60 group-hover:opacity-100 transition-opacity font-mono"
+                  aria-hidden="true"
+                >
                   0{index + 1}
                 </div>
 
@@ -53,8 +69,13 @@ export const ExperienceSection = () => {
                         />
                       </div>
                     )}
-                    <h3 className="text-4xl font-serif font-bold group-hover:text-accent transition-colors">
+                    <h3 className="text-4xl font-serif font-bold group-hover:text-accent transition-colors flex items-start gap-2">
                       {exp.company}
+                      <ArrowUpRight
+                        size={18}
+                        className="opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all duration-300 text-accent shrink-0 mt-2"
+                        aria-hidden="true"
+                      />
                     </h3>
                   </div>
 
@@ -80,15 +101,20 @@ export const ExperienceSection = () => {
                   <div className="flex flex-col gap-4">
                     {exp.details.map((detail) => (
                       <div key={detail.id} className="flex items-start gap-4">
-                         <div className="w-1.5 h-1.5 rounded-full bg-accent mt-2 shrink-0" aria-hidden="true" />
-                         <p className="text-sm text-foreground/80 leading-relaxed">
-                            {companyData ? companyData[`detail${detail.id}`] : detail.description}
-                         </p>
+                        <div
+                          className="w-1.5 h-1.5 rounded-full bg-accent mt-2 shrink-0"
+                          aria-hidden="true"
+                        />
+                        <p className="text-sm text-foreground/80 leading-relaxed">
+                          {companyData
+                            ? companyData[`detail${detail.id}`]
+                            : detail.description}
+                        </p>
                       </div>
                     ))}
                   </div>
                 </div>
-              </motion.div>
+              </motion.a>
             );
           })}
         </div>

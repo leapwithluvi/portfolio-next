@@ -15,6 +15,7 @@ export interface Experience {
   duration: string;
   details: JobDetail[];
   summary: string;
+  link: string;
 }
 
 
@@ -51,5 +52,6 @@ export const experiences: Experience[] = [
     ],
       summary:
         "Gained hands-on experience in full-stack development, strengthening skills in modern web to deliver high-quality software solutions.",
+    link: "https://www.rivoltatech.com/",
   },
 ];

@@ -25,8 +25,8 @@ export const profile: Profile = {
   name: "Luvi Aprilyansyah Gabriel",
   logoName: "leapwithluvi",
   title: "Fullstack Web Developer & AI/ML Enthusiast",
-  image: "/images/profile/me.jpeg",
-  resumeUrl: "/docs/CV_Luvi_Aprilyansyah_Gabriel_Fullstack_Web_Developer.pdf",
+  image: "/images/profile/image.png",
+  resumeUrl: "/docs/CV_Luvi Aprilyansyah Gabriel_Fullstack Web Developer.pdf",
  
   // --- Professional Context ---
   education: "SMK Negeri 1 Tenggarong",

@@ -6,10 +6,25 @@ import { Github, ExternalLink, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { projects } from "@/data/projects";
+import ReactMarkdown from "react-markdown";
+import { useEffect, useState } from "react";
 
 export default function ProjectDetailClient({ project }: { project: Project }) {
+  // 1. Inisialisasi state untuk mematikan rendering dinamis sebelum hidrasi selesai
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   // Get other projects for recommendation
-  const otherProjects = projects.filter((p) => p.slug !== project.slug).slice(0, 3);
+  const otherProjects = projects
+    .filter((p) => p.slug !== project.slug)
+    .slice(0, 3);
+
+  // Normalisasi pengecekan status agar aman
+  const isComplete =
+    project.status === "Complete" || project.status === "Completed";
 
   return (
     <div className="min-h-screen bg-background pb-32">
@@ -35,18 +50,29 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mt-12 pt-12 border-t border-border/50">
               <div className="flex flex-col gap-2">
-                <span className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold">Role</span>
-                <span className="text-lg font-medium">{project.role || "Lead Developer"}</span>
+                <span className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold">
+                  Role
+                </span>
+                <span className="text-lg font-medium">
+                  {project.role || "Lead Developer"}
+                </span>
               </div>
               <div className="flex flex-col gap-2">
-                <span className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold">Year</span>
+                <span className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold">
+                  Year
+                </span>
                 <span className="text-lg font-medium">{project.year}</span>
               </div>
               <div className="flex flex-col gap-2">
-                <span className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold">Status</span>
+                <span className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold">
+                  Status
+                </span>
                 <span className="text-lg font-medium flex items-center gap-2">
-                  <span className={`w-2 h-2 rounded-full ${project.status === 'Complete' ? 'bg-green-500' : 'bg-yellow-500'}`} />
-                  {project.status}
+                  {/* Gunakan operator ternary berbasis state dipadukan dengan nilai fallback */}
+                  <span
+                    className={`w-2 h-2 rounded-full ${!isMounted ? "bg-yellow-500" : isComplete ? "bg-green-500" : "bg-yellow-500"}`}
+                  />
+                  {!isMounted ? project.status : project.status}
                 </span>
               </div>
             </div>
@@ -78,10 +104,52 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
       <section className="mb-32 px-4">
         <div className="max-container grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
           <div className="lg:col-span-7 flex flex-col gap-10">
-            <h2 className="text-3xl md:text-4xl font-serif font-bold">Concept & Challenge</h2>
-            <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed font-light">
-              {project.longDescription || project.deskProject}
-            </p>
+            <h2 className="text-3xl md:text-4xl font-serif font-bold">
+              Description Project
+            </h2>
+
+            {/* Trik Inti: Tampilkan deskripsi pendek bawaan server dulu, tukar ke Markdown sewaktu mounted di client */}
+            {!isMounted ? (
+              <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed font-light">
+                {project.deskProject}
+              </p>
+            ) : (
+              <div className="prose prose-neutral dark:prose-invert max-w-none flex flex-col gap-6 text-muted-foreground">
+                {project.longDescription ? (
+                  <ReactMarkdown
+                    components={{
+                      h2: ({ node, ...props }) => (
+                        <h3
+                          className="text-2xl md:text-3xl font-serif font-bold text-foreground mt-8 mb-2 tracking-tight"
+                          {...props}
+                        />
+                      ),
+                      h3: ({ node, ...props }) => (
+                        <h4
+                          className="text-xl font-serif font-bold text-foreground mt-6 mb-1 tracking-tight"
+                          {...props}
+                        />
+                      ),
+                      p: ({ node, ...props }) => (
+                        <p
+                          className="text-base md:text-lg leading-relaxed font-light text-muted-foreground"
+                          {...props}
+                        />
+                      ),
+                      strong: ({ node, ...props }) => (
+                        <strong className="font-bold text-accent" {...props} />
+                      ),
+                    }}
+                  >
+                    {project.longDescription}
+                  </ReactMarkdown>
+                ) : (
+                  <p className="text-xl md:text-2xl leading-relaxed font-light">
+                    {project.deskProject}
+                  </p>
+                )}
+              </div>
+            )}
 
             <div className="flex flex-wrap gap-4 mt-8">
               <a
@@ -106,7 +174,9 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
           </div>
 
           <div className="lg:col-span-5 flex flex-col gap-10">
-            <h2 className="text-xl font-serif font-bold uppercase tracking-widest">Stack Architecture</h2>
+            <h2 className="text-xl font-serif font-bold uppercase tracking-widest">
+              Stack Architecture
+            </h2>
             <div className="flex flex-wrap gap-3">
               {project.stacks.map((stack) => (
                 <div
@@ -125,10 +195,15 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
       {project.gallery && project.gallery.length > 0 && (
         <section className="mb-48 px-4">
           <div className="max-container flex flex-col gap-12">
-            <h2 className="text-xl font-serif font-bold uppercase tracking-widest">Gallery_Details</h2>
+            <h2 className="text-xl font-serif font-bold uppercase tracking-widest">
+              Gallery_Details
+            </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {project.gallery.map((img, idx) => (
-                <div key={idx} className="relative aspect-video w-full border border-border overflow-hidden bg-muted group">
+                <div
+                  key={idx}
+                  className="relative aspect-video w-full border border-border overflow-hidden bg-muted group"
+                >
                   <Image
                     src={img}
                     alt={`${project.imgAlt} - gallery ${idx + 1}`}
@@ -146,8 +221,15 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
       <section className="border-t border-border pt-32 px-4">
         <div className="max-container flex flex-col gap-16">
           <div className="flex justify-between items-end">
-            <h2 className="text-4xl md:text-6xl font-serif font-bold tracking-tighter">Explore More</h2>
-            <Link href="/#work" className="text-[10px] font-bold uppercase tracking-[0.3em] text-accent pb-2 border-b border-accent">View All</Link>
+            <h2 className="text-4xl md:text-6xl font-serif font-bold tracking-tighter">
+              Explore More
+            </h2>
+            <Link
+              href="/#work"
+              className="text-[10px] font-bold uppercase tracking-[0.3em] text-accent pb-2 border-b border-accent"
+            >
+              View All
+            </Link>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-border border border-border">
